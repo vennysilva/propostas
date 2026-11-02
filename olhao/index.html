@@ -103,14 +103,19 @@ a{color:inherit}
 .abertura__topo{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:max(18px,env(safe-area-inset-top));padding-bottom:12px}
 .logo{height:auto}
 .logo--abertura{width:112px}
-.abertura__cliente{font-size:14px;color:rgba(255,255,255,.88);text-align:right;max-width:22ch;line-height:1.3}
+.abertura__cliente{display:flex;flex-direction:column;align-items:center;gap:3px;flex:none;background:#fff;border-radius:10px;padding:6px 10px 8px;box-shadow:0 4px 16px rgba(0,0,0,.28)}
+.abertura__cliente-rotulo{font-size:12px;line-height:1.2;font-weight:600;color:var(--tinta-2);letter-spacing:.01em}
+.abertura__cliente img{width:112px;height:auto}
+@media (min-width:768px){.abertura__cliente{padding:8px 12px 10px}.abertura__cliente img{width:140px}}
+@media (min-width:1280px){.abertura__cliente img{width:168px}}
+.abertura__cliente--texto{display:block;background:none;box-shadow:none;padding:0;font-size:14px;color:rgba(255,255,255,.88);text-align:right;max-width:22ch;line-height:1.3}
 .abertura__texto{padding-bottom:max(36px,calc(env(safe-area-inset-bottom) + 28px))}
 .abertura h1{font-family:var(--titulos);font-weight:700;font-size:clamp(50px,14.5vw,128px);line-height:.9;letter-spacing:-.01em;max-width:9.5ch;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.25)}
 .abertura__sub{margin-top:24px;font-size:clamp(17px,2.4vw,22px);color:rgba(255,255,255,.92);max-width:44ch}
 .abertura__acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .abertura__pausa{position:absolute;right:var(--gutter);bottom:max(20px,env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:rgba(12,17,14,.35);color:#fff;display:flex;align-items:center;justify-content:center}
 .abertura__pausa .ic{width:18px;height:18px}
-@media (max-width:559px){.abertura__acoes .botao{flex:1 1 100%}.abertura__pausa{bottom:auto;top:calc(max(18px,env(safe-area-inset-top)) + 64px)}.abertura__cliente{font-size:13px}}
+@media (max-width:559px){.abertura__acoes .botao{flex:1 1 100%}.abertura__pausa{bottom:auto;top:calc(max(18px,env(safe-area-inset-top)) + 96px)}}
 @media (min-width:768px){.logo--abertura{width:140px}.abertura__texto{padding-bottom:64px}}
 
 /* barra de navegação */
@@ -182,9 +187,7 @@ a{color:inherit}
 
 /* configurador */
 .seccao--escolher{background:var(--branco)}
-.config{display:grid;gap:40px}
-@media (min-width:1024px){.config{grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:start}}
-@media (min-width:1280px){.config{grid-template-columns:minmax(0,1fr) 420px}}
+.config{display:block}
 .passo{border:0;margin:0 0 44px;padding:0;min-width:0}
 .passo:last-child{margin-bottom:0}
 .passo__cab{display:flex;align-items:center;gap:12px;width:100%;padding:0;margin-bottom:16px}
@@ -197,9 +200,10 @@ a{color:inherit}
 .grelha{display:grid;gap:12px}
 .grelha--desenhos{grid-template-columns:1fr 1fr}
 .grelha--niveis{grid-template-columns:1fr}
-.grelha--tamanhos{grid-template-columns:1fr 1fr;max-width:640px}
+.grelha--tamanhos{grid-template-columns:1fr 1fr;max-width:760px}
 @media (min-width:560px){.grelha{gap:16px}.grelha--niveis{grid-template-columns:repeat(3,1fr)}}
-@media (min-width:1280px){.grelha--desenhos{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:900px){.grelha--desenhos{grid-template-columns:repeat(4,1fr)}.opcoes-lista{grid-template-columns:1fr 1fr;column-gap:16px}}
+@media (min-width:1280px){.grelha{gap:20px}}
 .cartao{position:relative;display:flex;flex-direction:column;text-align:left;padding:0;border:1.5px solid var(--linha);border-radius:12px;background:var(--branco);overflow:hidden;transition:border-color .15s,box-shadow .15s;min-width:0}
 .cartao:hover{border-color:var(--linha-2)}
 .cartao[aria-pressed="true"]{border-color:var(--grafite);box-shadow:0 0 0 2px var(--grafite)}
@@ -240,42 +244,6 @@ a{color:inherit}
 .opcao[aria-checked="true"] .interruptor{background:var(--grafite)}
 .opcao[aria-checked="true"] .interruptor i{transform:translateX(20px);background:var(--verde)}
 
-/* resumo */
-.resumo{min-width:0}
-@media (min-width:1024px){.resumo{position:sticky;top:calc(var(--barra) + 20px)}}
-.resumo__dentro{background:var(--cal);border:1.5px solid var(--linha);border-radius:16px;padding:18px}
-@media (min-width:768px){.resumo__dentro{padding:22px}}
-.resumo__rotulo{font-family:var(--titulos);font-size:22px;color:var(--verde-escuro);margin-bottom:12px}
-.resumo__media{margin:0}
-.resumo__foto,.resumo__mosaico{width:100%;aspect-ratio:3/2;border-radius:10px;object-fit:cover;background:var(--papel)}
-.resumo__mosaico{display:grid;grid-template-columns:1fr 1fr;gap:4px;overflow:hidden}
-.resumo__mosaico span{overflow:hidden}
-.resumo__mosaico img{width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
-.resumo__legenda{font-size:13px;color:var(--tinta-3);margin-top:8px;line-height:1.45}
-.resumo__titulo{font-family:var(--titulos);font-weight:700;font-size:32px;line-height:1.02;margin-top:16px;text-wrap:balance}
-.resumo__passos{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.resumo__passos li{font-size:13px;font-weight:700;border-radius:6px;padding:4px 9px;background:var(--papel);color:var(--tinta-2)}
-.resumo__passos li.feito{background:var(--grafite);color:#fff}
-.resumo__leva{margin-top:16px;display:grid;gap:12px}
-.resumo__leva h4{font-size:14px;font-weight:700;color:var(--tinta-3);margin-bottom:4px}
-.resumo__leva ul{display:grid;gap:4px;font-size:15px}
-.resumo__leva li{padding-left:18px;position:relative;line-height:1.45}
-.resumo__leva li::before{content:"";position:absolute;left:3px;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--verde)}
-.resumo__medidas{margin:16px 0 0;display:grid;gap:0;border-top:1px solid var(--linha)}
-.resumo__medidas div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--linha);font-size:15px}
-.resumo__medidas dt{color:var(--tinta-2);min-width:0}
-.resumo__medidas dd{margin:0;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.resumo__acoes{display:grid;gap:10px;margin-top:18px}
-.resumo__acoes .botao{width:100%}
-
-/* barra fixa da escolha (telemóvel e tablet) */
-.barra-escolha{position:fixed;left:0;right:0;bottom:0;z-index:35;display:flex;align-items:center;gap:12px;padding:10px var(--gutter) max(10px,env(safe-area-inset-bottom));background:var(--grafite);color:#fff;border-top:3px solid var(--verde);box-shadow:0 -6px 18px rgba(0,0,0,.18)}
-.barra-escolha__foto{width:56px;height:42px;border-radius:6px;object-fit:cover;flex:none}
-.barra-escolha__texto{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
-.barra-escolha__rotulo{font-size:12px;color:var(--claro)}
-.barra-escolha__texto span:last-child{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media (min-width:1024px){.barra-escolha{display:none!important}}
-.com-barra-escolha .seccao--escolher{padding-bottom:120px}
 
 /* desenhos */
 .seccao--desenhos{background:var(--cal)}
@@ -408,7 +376,7 @@ a{color:inherit}
 .etapa h3{font-family:var(--titulos);font-weight:700;font-size:26px;line-height:1.05;padding-top:8px}
 .etapa p{color:var(--tinta-2);margin-top:6px;max-width:40ch}
 @media (min-width:1024px){
-  .etapas{grid-template-columns:repeat(5,1fr);gap:24px}
+  .etapas{grid-template-columns:repeat(4,1fr);gap:24px}
   .etapa{padding:64px 0 0}
   .etapa::before{left:52px;right:-24px;top:21px;bottom:auto;width:auto;height:2px}
 }
@@ -491,19 +459,9 @@ a{color:inherit}
 .ampliada__nav .botao{white-space:nowrap}
 .ampliada.pode-ampliar{touch-action:manipulation;cursor:zoom-in}
 .ampliada.pode-ampliar.zoom{cursor:zoom-out}
-.dialogo--falar{width:min(620px,94vw)}
-.falar{padding:18px 20px 22px;display:grid;gap:12px}
-.falar__rotulo{font-size:14px;color:var(--tinta-2)}
-.falar textarea{width:100%;border:1.5px solid var(--linha-2);border-radius:10px;padding:12px;font-size:15px;line-height:1.5;resize:vertical;background:var(--cal)}
-.falar__acoes{display:flex;flex-wrap:wrap;gap:10px}
-.falar__acoes .botao{flex:1 1 200px}
-.falar__contactos{font-size:15px;color:var(--tinta-2)}
-.falar__contactos a{display:inline-block;min-height:44px;line-height:44px;font-weight:700;color:var(--tinta)}
-.aviso{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:80;background:var(--grafite);color:#fff;padding:12px 18px;border-radius:10px;font-weight:700;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100vw - 32px)}
-.aviso--ancorado{bottom:auto;transform:none;white-space:nowrap}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
-@media print{.barra,.barra-escolha,.abertura__video,.abertura__pausa,.leitor,.resumo__acoes,.desenho__acoes{display:none!important}.abertura{min-height:auto;padding:40px 0}.transcricao{display:block}}
+@media print{.barra,.abertura__video,.abertura__pausa,.leitor,.desenho__acoes{display:none!important}.abertura{min-height:auto;padding:40px 0}.transcricao{display:block}}
 
 </style>
 </head>
@@ -532,7 +490,7 @@ a{color:inherit}
 <header class="abertura" id="inicio">
   <div class="abertura__fundo"><picture><source media="(orientation: portrait) and (min-width: 600px) and (max-width: 1023px)" type="image/webp" srcset="assets/img/olhao-ao-entardecer-vertical-1080.webp"><source media="(orientation: portrait) and (min-width: 412px) and (max-width: 599px) and (min-resolution: 3dppx), (orientation: portrait) and (min-width: 412px) and (max-width: 599px) and (-webkit-min-device-pixel-ratio: 3)" type="image/webp" srcset="assets/img/olhao-ao-entardecer-vertical-1080.webp"><source media="(orientation: portrait) and (max-width: 599px)" type="image/webp" srcset="assets/img/olhao-ao-entardecer-vertical-720.webp"><source type="image/webp" sizes="100vw" srcset="assets/img/olhao-ao-entardecer-640.webp 640w, assets/img/olhao-ao-entardecer-1024.webp 1024w, assets/img/olhao-ao-entardecer-1600.webp 1600w, assets/img/olhao-ao-entardecer-2048.webp 2048w, assets/img/olhao-ao-entardecer-2688.webp 2688w"><img class="abertura__poster" src="assets/img/olhao-ao-entardecer-1200.jpg" alt="" width="2688" height="1520" fetchpriority="high" decoding="async"></picture><video class="abertura__video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/video/abertura.mp4"></video></div>
   <div class="abertura__veu" aria-hidden="true"></div>
-  <div class="abertura__topo envolve"><img class="logo logo--abertura" src="assets/img/logo-4x4.webp" alt="4x4 Multitrabalhos" width="500" height="250"><span class="abertura__cliente">Proposta à Câmara Municipal de Olhão</span></div>
+  <div class="abertura__topo envolve"><img class="logo logo--abertura" src="assets/img/logo-4x4.webp" alt="4x4 Multitrabalhos" width="500" height="250"><div class="abertura__cliente"><span class="abertura__cliente-rotulo">Proposta para</span><img src="assets/img/municipio-olhao.webp" alt="Município de Olhão" width="336" height="167" decoding="async"></div></div>
   <div class="abertura__texto envolve">
     <h1>Abrigos de passageiros para Olhão</h1>
     <p class="abertura__sub">25 abrigos · escolha o desenho, o nível e o tamanho</p>
@@ -577,7 +535,7 @@ a{color:inherit}
     </div>
       <details class="transcricao" data-transcricao>
         <summary>Texto da narração</summary>
-        <div class="transcricao__texto"><p data-par="0">Bem-vindo. Esta página apresenta as propostas da 4x4 Multitrabalhos para os vinte e cinco abrigos de passageiros de Olhão. A escolha faz-se em três passos.</p><p data-par="1"><span class="transcricao__cap">Desenhos</span>Primeiro, o desenho. Há quatro. O Essencial, em aço e vidro: simples, robusto e discreto em qualquer rua. O Sombra da Ria, com ripado de madeira e uma cobertura larga em consola, inspirado nos passeios à beira da Ria Formosa, onde a sombra faz falta. O Cubista: um volume branco de cobertura plana com platibanda, como as casas cubistas de Olhão, com um painel perfurado azul, de padrão de azulejo, e um pequeno mirante com a placa da paragem. E o Mercado, inspirado nos Mercados de Olhão, construídos entre 1912 e 1916 em ferro, vidro e tijolo à vista: colunas verdes esbeltas, cobertura de vidro e um murete de tijolo.</p><p data-par="2"><span class="transcricao__cap">Níveis</span>Segundo, o nível. O nível Abrigo não leva eletricidade nem ecrã: tem banco de três lugares, vitrine com horários e um código QR com o percurso. O nível Solar junta painéis solares e bateria, iluminação que acende quando há pessoas, e carregamento de telemóvel. O nível Informação junta ainda um ecrã de informação ao passageiro.</p><p data-par="3"><span class="transcricao__cap">Tamanhos</span>Terceiro, o tamanho: normal, com três lugares, ou compacto, com dois, para passeios estreitos.</p><p data-par="4"><span class="transcricao__cap">Opções</span>A qualquer combinação pode juntar-se um painel iluminado para a comunicação do Município ou para publicidade, suporte de bicicletas, cobertura verde, bebedouro ou botão de apoio. Todos os abrigos têm espaço para cadeira de rodas, altura livre de 2,40 m e piso tátil, e são feitos em aço galvanizado e pintado, preparado para o ar do mar.</p><p data-par="5"><span class="transcricao__cap">Próximos passos</span>Depois da escolha, visitamos os vinte e cinco locais, preparamos os desenhos de execução para aprovação, fabricamos e instalamos. Estamos ao dispor para ver tudo consigo.</p></div>
+        <div class="transcricao__texto"><p data-par="0">Bem-vindo. Esta página apresenta as propostas da 4x4 Multitrabalhos para os vinte e cinco abrigos de passageiros de Olhão. A escolha faz-se em três passos.</p><p data-par="1"><span class="transcricao__cap">Desenhos</span>Primeiro, o desenho. Há quatro. O Essencial, em aço e vidro: simples, robusto e discreto em qualquer rua. O Sombra da Ria, com ripado de madeira e uma cobertura larga em consola, inspirado nos passeios à beira da Ria Formosa, onde a sombra faz falta. O Cubista: um volume branco de cobertura plana com platibanda, como as casas cubistas de Olhão, com um painel perfurado azul, de padrão de azulejo, e um pequeno mirante com a placa da paragem. E o Mercado, inspirado nos Mercados de Olhão, construídos entre 1912 e 1916 em ferro, vidro e tijolo à vista: colunas verdes esbeltas, cobertura de vidro e um murete de tijolo.</p><p data-par="2"><span class="transcricao__cap">Níveis</span>Segundo, o nível. O nível Abrigo não leva eletricidade nem ecrã: tem banco de três lugares, vitrine com horários e um código QR com o percurso. O nível Solar junta painéis solares e bateria, iluminação que acende quando há pessoas, e carregamento de telemóvel. O nível Informação junta ainda um ecrã de informação ao passageiro.</p><p data-par="3"><span class="transcricao__cap">Tamanhos</span>Terceiro, o tamanho: normal, com três lugares, ou compacto, com dois, para passeios estreitos.</p><p data-par="4"><span class="transcricao__cap">Opções</span>A qualquer combinação pode juntar-se um painel iluminado para a comunicação do Município ou para publicidade, suporte de bicicletas, cobertura verde, bebedouro ou botão de apoio. Todos os abrigos têm espaço para cadeira de rodas, altura livre de 2,40 m e piso tátil, e são feitos em aço galvanizado e pintado, preparado para o ar do mar.</p><p data-par="5"><span class="transcricao__cap">Próximos passos</span>Depois da escolha, preparamos os desenhos de execução para aprovação, fabricamos e instalamos. Estamos ao dispor para ver tudo consigo.</p></div>
       </details>
     </div>
   </div>
@@ -594,25 +552,25 @@ a{color:inherit}
           <legend class="passo__cab"><span class="passo__n" aria-hidden="true">1</span><span class="passo__t">Desenho</span><span class="passo__estado" data-estado="desenho">por escolher</span></legend>
           <div class="grelha grelha--desenhos">
         <button type="button" class="cartao cartao--desenho" data-desenho="essencial" aria-pressed="false">
-          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/essencial-480.webp 480w, assets/img/essencial-800.webp 800w, assets/img/essencial-1200.webp 1200w, assets/img/essencial-1600.webp 1600w, assets/img/essencial-2048.webp 2048w" sizes="(min-width:1280px) 165px, (min-width:1024px) 25vw, (min-width:560px) 45vw, 46vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/essencial-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
+          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/essencial-480.webp 480w, assets/img/essencial-800.webp 800w, assets/img/essencial-1200.webp 1200w, assets/img/essencial-1600.webp 1600w, assets/img/essencial-2048.webp 2048w" sizes="(min-width:1280px) 279px, (min-width:900px) 22vw, (min-width:560px) 45vw, 46vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/essencial-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
           <span class="cartao__corpo"><span class="cartao__nome">Essencial</span><span class="amostras" aria-hidden="true"><i style="background:#3A3F43"></i><i style="background:#A7C4CC"></i><i style="background:#DCE7EA"></i></span>
           <span class="cartao__texto">Simples, robusto e transparente. O abrigo certo para a maior parte da rede.</span></span>
           <span class="cartao__visto" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-certo"></use></svg></span>
         </button>
         <button type="button" class="cartao cartao--desenho" data-desenho="sombra-da-ria" aria-pressed="false">
-          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/sombra-da-ria-480.webp 480w, assets/img/sombra-da-ria-800.webp 800w, assets/img/sombra-da-ria-1200.webp 1200w, assets/img/sombra-da-ria-1600.webp 1600w, assets/img/sombra-da-ria-2048.webp 2048w" sizes="(min-width:1280px) 165px, (min-width:1024px) 25vw, (min-width:560px) 45vw, 46vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/sombra-da-ria-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
+          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/sombra-da-ria-480.webp 480w, assets/img/sombra-da-ria-800.webp 800w, assets/img/sombra-da-ria-1200.webp 1200w, assets/img/sombra-da-ria-1600.webp 1600w, assets/img/sombra-da-ria-2048.webp 2048w" sizes="(min-width:1280px) 279px, (min-width:900px) 22vw, (min-width:560px) 45vw, 46vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/sombra-da-ria-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
           <span class="cartao__corpo"><span class="cartao__nome">Sombra da Ria</span><span class="amostras" aria-hidden="true"><i style="background:#B27A44"></i><i style="background:#F1F0EA"></i><i style="background:#3A3F43"></i></span>
           <span class="cartao__texto">Sombra ampla e madeira quente ao toque, para os dias de calor junto à Ria.</span></span>
           <span class="cartao__visto" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-certo"></use></svg></span>
         </button>
         <button type="button" class="cartao cartao--desenho" data-desenho="cubista" aria-pressed="false">
-          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/cubista-480.webp 480w, assets/img/cubista-800.webp 800w, assets/img/cubista-1200.webp 1200w, assets/img/cubista-1600.webp 1600w, assets/img/cubista-2048.webp 2048w" sizes="(min-width:1280px) 165px, (min-width:1024px) 25vw, (min-width:560px) 45vw, 46vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/cubista-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
+          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/cubista-480.webp 480w, assets/img/cubista-800.webp 800w, assets/img/cubista-1200.webp 1200w, assets/img/cubista-1600.webp 1600w, assets/img/cubista-2048.webp 2048w" sizes="(min-width:1280px) 279px, (min-width:900px) 22vw, (min-width:560px) 45vw, 46vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/cubista-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
           <span class="cartao__corpo"><span class="cartao__nome">Cubista</span><span class="amostras" aria-hidden="true"><i style="background:#F4F3EE"></i><i style="background:#1F4E9C"></i><i style="background:#B27A44"></i></span>
           <span class="cartao__texto">Um volume branco de cobertura plana, como as casas cubistas de Olhão.</span></span>
           <span class="cartao__visto" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-certo"></use></svg></span>
         </button>
         <button type="button" class="cartao cartao--desenho" data-desenho="mercado" aria-pressed="false">
-          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/mercado-480.webp 480w, assets/img/mercado-800.webp 800w, assets/img/mercado-1200.webp 1200w, assets/img/mercado-1600.webp 1600w, assets/img/mercado-2048.webp 2048w" sizes="(min-width:1280px) 165px, (min-width:1024px) 25vw, (min-width:560px) 45vw, 46vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/mercado-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
+          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/mercado-480.webp 480w, assets/img/mercado-800.webp 800w, assets/img/mercado-1200.webp 1200w, assets/img/mercado-1600.webp 1600w, assets/img/mercado-2048.webp 2048w" sizes="(min-width:1280px) 279px, (min-width:900px) 22vw, (min-width:560px) 45vw, 46vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/mercado-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
           <span class="cartao__corpo"><span class="cartao__nome">Mercado</span><span class="amostras" aria-hidden="true"><i style="background:#1F4A37"></i><i style="background:#A44F2E"></i><i style="background:#A7C4CC"></i></span>
           <span class="cartao__texto">Ferro, vidro e tijolo à vista, em homenagem aos Mercados de Olhão.</span></span>
           <span class="cartao__visto" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-certo"></use></svg></span>
@@ -623,19 +581,19 @@ a{color:inherit}
           <p class="passo__ajuda">Qualquer desenho pode ter qualquer nível. No Cubista, a solução solar fica escondida atrás da platibanda; o número de painéis e a potência confirmam-se no projeto. No Mercado, a solução solar é vidro fotovoltaico na cobertura, a confirmar no projeto.</p>
           <div class="grelha grelha--niveis">
         <button type="button" class="cartao cartao--nivel" data-nivel="abrigo" aria-pressed="false">
-          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/cubista-480.webp 480w, assets/img/cubista-800.webp 800w, assets/img/cubista-1200.webp 1200w, assets/img/cubista-1600.webp 1600w, assets/img/cubista-2048.webp 2048w" sizes="(min-width:1280px) 226px, (min-width:1024px) 165px, (min-width:560px) 30vw, 88vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/cubista-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
+          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/cubista-480.webp 480w, assets/img/cubista-800.webp 800w, assets/img/cubista-1200.webp 1200w, assets/img/cubista-1600.webp 1600w, assets/img/cubista-2048.webp 2048w" sizes="(min-width:1280px) 379px, (min-width:560px) 30vw, 88vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/cubista-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
           <span class="cartao__corpo"><span class="cartao__nome">Abrigo</span>
           <span class="cartao__curto">Sem eletricidade nem ecrã</span><ul class="cartao__lista"><li>Banco com encosto e braços (3 lugares no normal, 2 no compacto)</li><li>Vitrine com horários e mapa</li><li>Código QR com o percurso</li><li>Zona para cadeira de rodas</li><li>Faixa de piso tátil de alerta junto ao lancil, em frente ao abrigo</li></ul></span>
           <span class="cartao__visto" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-certo"></use></svg></span>
         </button>
         <button type="button" class="cartao cartao--nivel" data-nivel="solar" aria-pressed="false">
-          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/sombra-da-ria-solar-luz-480.webp 480w, assets/img/sombra-da-ria-solar-luz-800.webp 800w, assets/img/sombra-da-ria-solar-luz-1200.webp 1200w, assets/img/sombra-da-ria-solar-luz-1600.webp 1600w, assets/img/sombra-da-ria-solar-luz-1920.webp 1920w" sizes="(min-width:1280px) 226px, (min-width:1024px) 165px, (min-width:560px) 30vw, 88vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/sombra-da-ria-solar-luz-1200.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture></span>
+          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/sombra-da-ria-solar-luz-480.webp 480w, assets/img/sombra-da-ria-solar-luz-800.webp 800w, assets/img/sombra-da-ria-solar-luz-1200.webp 1200w, assets/img/sombra-da-ria-solar-luz-1600.webp 1600w, assets/img/sombra-da-ria-solar-luz-1920.webp 1920w" sizes="(min-width:1280px) 379px, (min-width:560px) 30vw, 88vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/sombra-da-ria-solar-luz-1200.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async"></picture></span>
           <span class="cartao__corpo"><span class="cartao__nome">Solar</span>
           <span class="cartao__curto">Energia solar, luz e carregamento</span><ul class="cartao__lista"><li>Tudo o do nível Abrigo</li><li>Painéis solares e bateria: energia própria</li><li>Iluminação LED que acende ao entardecer e reforça quando há pessoas</li><li>Duas tomadas USB-C para carregar o telemóvel</li></ul></span>
           <span class="cartao__visto" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-certo"></use></svg></span>
         </button>
         <button type="button" class="cartao cartao--nivel" data-nivel="informacao" aria-pressed="false">
-          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/cubista-informacao-480.webp 480w, assets/img/cubista-informacao-800.webp 800w, assets/img/cubista-informacao-1200.webp 1200w, assets/img/cubista-informacao-1600.webp 1600w, assets/img/cubista-informacao-2048.webp 2048w" sizes="(min-width:1280px) 226px, (min-width:1024px) 165px, (min-width:560px) 30vw, 88vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/cubista-informacao-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
+          <span class="cartao__media"><picture><source type="image/webp" data-srcset="assets/img/cubista-informacao-480.webp 480w, assets/img/cubista-informacao-800.webp 800w, assets/img/cubista-informacao-1200.webp 1200w, assets/img/cubista-informacao-1600.webp 1600w, assets/img/cubista-informacao-2048.webp 2048w" sizes="(min-width:1280px) 379px, (min-width:560px) 30vw, 88vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/cubista-informacao-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span>
           <span class="cartao__corpo"><span class="cartao__nome">Informação</span>
           <span class="cartao__curto">Solar, mais ecrã ao passageiro</span><ul class="cartao__lista"><li>Tudo o do nível Solar</li><li>Ecrã de informação ao passageiro</li><li>Placa com código QR e NFC</li></ul></span>
           <span class="cartao__visto" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-certo"></use></svg></span>
@@ -695,32 +653,7 @@ a{color:inherit}
         </button></li></ul>
         </fieldset>
       </div>
-      <aside class="resumo" id="resumo" aria-labelledby="t-resumo" aria-live="polite">
-        <div class="resumo__dentro">
-          <h3 class="resumo__rotulo" id="t-resumo">A sua escolha</h3>
-          <figure class="resumo__media">
-            <div class="resumo__mosaico" data-mosaico><span><picture><source type="image/webp" data-srcset="assets/img/essencial-480.webp 480w, assets/img/essencial-800.webp 800w, assets/img/essencial-1200.webp 1200w, assets/img/essencial-1600.webp 1600w, assets/img/essencial-2048.webp 2048w" sizes="(min-width:1024px) 185px, (min-width:560px) 43vw, 39vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/essencial-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span><span><picture><source type="image/webp" data-srcset="assets/img/sombra-da-ria-480.webp 480w, assets/img/sombra-da-ria-800.webp 800w, assets/img/sombra-da-ria-1200.webp 1200w, assets/img/sombra-da-ria-1600.webp 1600w, assets/img/sombra-da-ria-2048.webp 2048w" sizes="(min-width:1024px) 185px, (min-width:560px) 43vw, 39vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/sombra-da-ria-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span><span><picture><source type="image/webp" data-srcset="assets/img/cubista-480.webp 480w, assets/img/cubista-800.webp 800w, assets/img/cubista-1200.webp 1200w, assets/img/cubista-1600.webp 1600w, assets/img/cubista-2048.webp 2048w" sizes="(min-width:1024px) 185px, (min-width:560px) 43vw, 39vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/cubista-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span><span><picture><source type="image/webp" data-srcset="assets/img/mercado-480.webp 480w, assets/img/mercado-800.webp 800w, assets/img/mercado-1200.webp 1200w, assets/img/mercado-1600.webp 1600w, assets/img/mercado-2048.webp 2048w" sizes="(min-width:1024px) 185px, (min-width:560px) 43vw, 39vw"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/mercado-1200.jpg" alt="" width="2048" height="1360" loading="lazy" decoding="async"></picture></span></div>
-            <img class="resumo__foto" data-resumo-foto alt="" hidden>
-            <figcaption class="resumo__legenda" data-resumo-legenda>Escolha um desenho para ver aqui a sua combinação.</figcaption>
-          </figure>
-          <p class="resumo__titulo" data-resumo-titulo>Ainda sem escolha</p>
-          <ol class="resumo__passos" data-resumo-passos></ol>
-          <div class="resumo__leva" data-resumo-leva></div>
-          <dl class="resumo__medidas" data-resumo-medidas></dl>
-          
-          <div class="resumo__acoes">
-            <button type="button" class="botao botao--escuro" data-ver-3d disabled><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-cubo"></use></svg>Ver em 3D</button>
-            <button type="button" class="botao botao--laranja" data-falar>Falar connosco sobre esta escolha</button>
-            <button type="button" class="botao botao--fantasma" data-copiar-ligacao><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-ligacao"></use></svg><span>Copiar ligação desta escolha</span></button>
-          </div>
-        </div>
-      </aside>
     </div>
-  </div>
-  <div class="barra-escolha" data-barra-escolha hidden>
-    <img class="barra-escolha__foto" data-barra-foto alt="" hidden>
-    <p class="barra-escolha__texto"><span class="barra-escolha__rotulo">A sua escolha</span><span data-barra-texto>Escolha um desenho</span></p>
-    <button type="button" class="botao botao--laranja botao--pequeno" data-ir="resumo">Ver</button>
   </div>
 </section>
 <section class="seccao seccao--desenhos" id="desenhos" aria-labelledby="t-desenhos">
@@ -884,7 +817,7 @@ a{color:inherit}
   <text class="c-rot c-rot--escuro" x="8" y="254">piso</text><text class="c-rot c-rot--escuro" x="8" y="282">tátil</text>
   <text class="c-rot c-rot--escuro" x="424" y="176" text-anchor="middle">cadeira de rodas</text>
 </svg>
-<figcaption class="legenda">Esquema sem escala. Zona para cadeira de rodas, altura livre e canal livre segundo o DL&nbsp;163/2006; inclui a faixa de piso tátil de alerta junto ao lancil, em frente ao abrigo. A implantação de cada paragem confirma-se no levantamento.</figcaption>
+<figcaption class="legenda">Esquema sem escala. Zona para cadeira de rodas, altura livre e canal livre segundo o DL&nbsp;163/2006; inclui a faixa de piso tátil de alerta junto ao lancil, em frente ao abrigo. A implantação de cada paragem confirma-se com o Município.</figcaption>
 </figure>
       <ul class="factos"><li class="facto"><h3>Sol e calor</h3><p class="facto__num">29 °C</p><p class="facto__rot">máximas médias de julho e agosto em Faro</p><p class="facto__txt">Coberturas que dão sombra a sério e ventilação pelas laterais. Em três dos quatro desenhos o banco é de madeira, que não escalda ao sol.</p></li><li class="facto"><h3>Ar marinho</h3><p class="facto__num">C4–C5</p><p class="facto__rot">classes de corrosão da ISO 12944-2:2017</p><p class="facto__txt">Aço galvanizado a quente e termolacado, com o sistema de proteção escolhido para ambiente costeiro.</p></li><li class="facto"><h3>Acessibilidade</h3><p class="facto__num">2,40 m</p><p class="facto__rot">de altura livre sob a cobertura</p><p class="facto__txt">Zona livre para cadeira de rodas dentro do abrigo e canal livre de 1,20 m no passeio, como pede o DL 163/2006. Inclui a faixa de piso tátil de alerta junto ao lancil, em frente ao abrigo.</p></li><li class="facto"><h3>Identidade</h3><p class="facto__cores" aria-hidden="true"><i style="background:#F4F3EE"></i><i style="background:#1F4E9C"></i><i style="background:#1F4A37"></i><i style="background:#A44F2E"></i></p><p class="facto__txt">O Cubista e o Mercado vêm da arquitetura de Olhão; os acabamentos podem seguir o azul e o branco da cidade.</p></li></ul>
     </div>
@@ -894,9 +827,9 @@ a{color:inherit}
   <div class="envolve">
     <div class="seccao__cab">
       <h2 class="titulo" id="t-avancar">Como avançamos</h2>
-      <p class="lead">Da escolha à instalação, em cinco passos. Os prazos de fabrico e de instalação acertam-se com o Município depois da escolha e do levantamento dos locais.</p>
+      <p class="lead">Da escolha à instalação, em quatro passos. Os prazos de fabrico e de instalação acertam-se com o Município depois da escolha.</p>
     </div>
-    <ol class="etapas"><li class="etapa"><span class="etapa__n" aria-hidden="true">1</span><h3>Escolha</h3><p>O Município escolhe o desenho, o nível e o tamanho, por paragem ou para toda a rede.</p></li><li class="etapa"><span class="etapa__n" aria-hidden="true">2</span><h3>Levantamento</h3><p>Visitamos os 25 locais: passeio, fundações, energia e acessibilidade.</p></li><li class="etapa"><span class="etapa__n" aria-hidden="true">3</span><h3>Desenhos de execução</h3><p>Desenhos de cada abrigo, para aprovação do Município.</p></li><li class="etapa"><span class="etapa__n" aria-hidden="true">4</span><h3>Fabrico</h3><p>Fabrico, galvanização e pintura; montagem de ensaio do primeiro abrigo.</p></li><li class="etapa"><span class="etapa__n" aria-hidden="true">5</span><h3>Instalação</h3><p>Fundações, montagem e ligação das funcionalidades, paragem a paragem.</p></li></ol>
+    <ol class="etapas"><li class="etapa"><span class="etapa__n" aria-hidden="true">1</span><h3>Escolha</h3><p>O Município escolhe o desenho, o nível e o tamanho, por paragem ou para toda a rede.</p></li><li class="etapa"><span class="etapa__n" aria-hidden="true">2</span><h3>Desenhos de execução</h3><p>Desenhos de cada abrigo, para aprovação do Município.</p></li><li class="etapa"><span class="etapa__n" aria-hidden="true">3</span><h3>Fabrico</h3><p>Fabrico, galvanização e pintura; montagem de ensaio do primeiro abrigo.</p></li><li class="etapa"><span class="etapa__n" aria-hidden="true">4</span><h3>Instalação</h3><p>Fundações, montagem e ligação das funcionalidades, paragem a paragem.</p></li></ol>
   </div>
 </section></main>
 <footer class="contacto" id="contacto" aria-labelledby="t-contacto">
@@ -941,18 +874,6 @@ a{color:inherit}
     <p class="visor__ajuda">Arraste para rodar · dois dedos ou roda do rato para aproximar · a figura tem 1,75 m.</p>
   </div>
 </dialog>
-<dialog class="dialogo dialogo--falar" id="dlg-falar" aria-labelledby="t-falar">
-  <div class="dialogo__cab"><p class="dialogo__titulo" id="t-falar">Falar connosco sobre esta escolha</p><button type="button" class="botao-ic" data-fechar aria-label="Fechar"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-fechar"></use></svg></button></div>
-  <div class="falar">
-    <label class="falar__rotulo" for="falar-texto">Resumo pronto a copiar (pode acrescentar o número de abrigos e os locais)</label>
-    <textarea id="falar-texto" rows="9" data-falar-texto></textarea>
-    <div class="falar__acoes">
-      <button type="button" class="botao botao--laranja" data-copiar-resumo><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-copiar"></use></svg><span>Copiar o resumo</span></button>
-      <a class="botao botao--escuro" data-email href="mailto:comercial@4x4mt.pt"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-email"></use></svg>Escrever email</a>
-    </div>
-    <p class="falar__contactos"><b>comercial@4x4mt.pt</b><br><a href="tel:+351265706549">+351 265 706 549</a> · <a href="tel:+351265706550">+351 265 706 550</a></p>
-  </div>
-</dialog>
 <dialog class="dialogo dialogo--imagem" id="dlg-imagem" aria-label="Imagem ampliada">
   <div class="dialogo__cab"><p class="dialogo__titulo" data-img-legenda></p><button type="button" class="botao-ic botao-ic--claro" data-fechar aria-label="Fechar"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-fechar"></use></svg></button></div>
   <div class="ampliada" data-img-area><img data-img-grande alt=""></div>
@@ -963,8 +884,7 @@ a{color:inherit}
     <button type="button" class="botao-ic botao-ic--claro" data-img-seg aria-label="Imagem seguinte"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-seguinte"></use></svg></button>
   </div>
 </dialog>
-<p class="aviso" role="status" aria-live="polite" data-aviso hidden></p>
-<script type="application/json" id="dados">{"modo":"publico","embebido":false,"ativos":{"img":{"olhao-ao-entardecer":{"l":[640,1024,1600,2048,2688],"w":2688,"h":1520,"jpeg":"olhao-ao-entardecer-1200.jpg","alt":"Olhão vista do alto ao fim da tarde: casas cubistas e a Ria Formosa"},"olhao-ao-entardecer-vertical":{"l":[720,1080],"w":1520,"h":2688,"jpeg":"olhao-ao-entardecer-vertical-1200.jpg","alt":"Olhão vista do alto ao fim da tarde: casas cubistas e a Ria Formosa"},"essencial-informacao-mupi":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"essencial-informacao-mupi-1200.jpg","alt":"Abrigo Essencial no nível Informação, com painéis solares, ecrã e MUPI"},"sombra-da-ria-solar-luz":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"sombra-da-ria-solar-luz-1200.jpg","alt":"Abrigo Sombra da Ria no nível Solar: a iluminação LED acende ao entardecer"},"essencial":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"essencial-1200.jpg","alt":"Abrigo Essencial numa rua de Olhão"},"estudo-essencial":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-essencial-1200.jpg","alt":"Estudo 3D do abrigo Essencial, em perspetiva, com uma pessoa à escala"},"essencial-rua":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"essencial-rua-1200.jpg","alt":"Abrigo Essencial: aço grafite e vidro laminado"},"estudo-essencial-frente":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-essencial-frente-1200.jpg","alt":"Estudo 3D do abrigo Essencial, vista de frente"},"estudo-essencial-lado":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-essencial-lado-1200.jpg","alt":"Estudo 3D do abrigo Essencial, vista lateral"},"movimento-essencial-poster":{"l":[480,800,1280],"w":1920,"h":1080,"jpeg":"movimento-essencial-poster-1200.jpg","alt":""},"sombra-da-ria":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"sombra-da-ria-1200.jpg","alt":"Abrigo Sombra da Ria junto à Ria Formosa"},"estudo-sombra-da-ria":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-sombra-da-ria-1200.jpg","alt":"Estudo 3D do abrigo Sombra da Ria, em perspetiva, com uma pessoa à escala"},"sombra-da-ria-passeio":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"sombra-da-ria-passeio-1200.jpg","alt":"Abrigo Sombra da Ria: ripado de madeira e cobertura em consola"},"sombra-da-ria-solar":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"sombra-da-ria-solar-1200.jpg","alt":"Abrigo Sombra da Ria no nível Solar, ao entardecer, com a iluminação LED acesa"},"estudo-sombra-da-ria-frente":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-sombra-da-ria-frente-1200.jpg","alt":"Estudo 3D do abrigo Sombra da Ria, vista de frente"},"movimento-sombra-da-ria-poster":{"l":[480,800,1280],"w":1920,"h":1080,"jpeg":"movimento-sombra-da-ria-poster-1200.jpg","alt":""},"cubista":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"cubista-1200.jpg","alt":"Abrigo Cubista numa rua de casas brancas"},"estudo-cubista":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-cubista-1200.jpg","alt":"Estudo 3D do abrigo Cubista, em perspetiva, com uma pessoa à escala"},"cubista-rua":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"cubista-rua-1200.jpg","alt":"Abrigo Cubista: painel perfurado azul e janela com aro azul"},"cubista-informacao":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"cubista-informacao-1200.jpg","alt":"Abrigo Cubista no nível Informação, à hora azul, com ecrã, iluminação e painel azul iluminado"},"estudo-cubista-frente":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-cubista-frente-1200.jpg","alt":"Estudo 3D do abrigo Cubista, vista de frente"},"cubista-noite":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"cubista-noite-1200.jpg","alt":"Abrigo Cubista no nível Informação, à hora azul, com iluminação LED"},"movimento-cubista-poster":{"l":[480,800,1280],"w":1920,"h":1080,"jpeg":"movimento-cubista-poster-1200.jpg","alt":""},"mercado":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"mercado-1200.jpg","alt":"Abrigo Mercado junto aos Mercados de Olhão"},"estudo-mercado":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-mercado-1200.jpg","alt":"Estudo 3D do abrigo Mercado, em perspetiva, com uma pessoa à escala"},"mercado-ria":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"mercado-ria-1200.jpg","alt":"Abrigo Mercado: colunas verdes, vidro e murete de tijolo"},"estudo-mercado-frente":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-mercado-frente-1200.jpg","alt":"Estudo 3D do abrigo Mercado, vista de frente"},"estudo-mercado-lado":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-mercado-lado-1200.jpg","alt":"Estudo 3D do abrigo Mercado, vista lateral"},"estudo-mercado-compacto":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-mercado-compacto-1200.jpg","alt":"Estudo 3D do abrigo Mercado compacto, em perspetiva, com uma pessoa à escala"},"movimento-mercado-poster":{"l":[480,800,1280],"w":1920,"h":1080,"jpeg":"movimento-mercado-poster-1200.jpg","alt":""},"video-olhao":{"l":[800,1280,1920],"w":1920,"h":1080,"jpeg":"video-olhao-1200.jpg","alt":"Abrigos de passageiros para Olhão"}},"video":{"abertura":"assets/video/abertura.mp4","nivel-solar":"assets/video/nivel-solar.mp4","movimento-essencial":"assets/video/movimento-essencial.mp4","movimento-sombra-da-ria":"assets/video/movimento-sombra-da-ria.mp4","movimento-cubista":"assets/video/movimento-cubista.mp4","movimento-mercado":"assets/video/movimento-mercado.mp4","completo":{"720":"assets/video/video-olhao-720.mp4","1080":"assets/video/video-olhao-1080.mp4"},"completoPoster":"assets/img/video-olhao-1280.webp","legendas":"assets/video/legendas-pt.vtt"},"glb":{"essencial":{"glb":"assets/3d/essencial.glb","gz":"assets/3d/essencial.glb.gz"},"essencial-compacto":{"glb":"assets/3d/essencial-compacto.glb","gz":"assets/3d/essencial-compacto.glb.gz"},"sombra-da-ria":{"glb":"assets/3d/sombra-da-ria.glb","gz":"assets/3d/sombra-da-ria.glb.gz"},"sombra-da-ria-compacto":{"glb":"assets/3d/sombra-da-ria-compacto.glb","gz":"assets/3d/sombra-da-ria-compacto.glb.gz"},"cubista":{"glb":"assets/3d/cubista.glb","gz":"assets/3d/cubista.glb.gz"},"cubista-compacto":{"glb":"assets/3d/cubista-compacto.glb","gz":"assets/3d/cubista-compacto.glb.gz"},"mercado":{"glb":"assets/3d/mercado.glb","gz":"assets/3d/mercado.glb.gz"},"mercado-compacto":{"glb":"assets/3d/mercado-compacto.glb","gz":"assets/3d/mercado-compacto.glb.gz"},"essencial-informacao-mupi":{"glb":"assets/3d/essencial-informacao-mupi.glb","gz":"assets/3d/essencial-informacao-mupi.glb.gz"}},"visor":"assets/visor3d.js"},"email":"comercial@4x4mt.pt","desenhos":[{"slug":"essencial","nome":"Essencial","leva":["Estrutura em aço grafite, galvanizado e pintado","Costas e lateral em vidro temperado laminado","Cobertura translúcida em policarbonato com proteção UV","Banco de aço grafite com encosto e braços","Vitrine com mapa e horários"],"imagem":"essencial","estudo":"estudo-essencial","modelos":{"normal":"essencial","compacto":"essencial-compacto"},"dim":{"normal":{"txt":"4,20 × 1,81 × 2,81 m","livre_txt":"2,40 m","comp_txt":"4,20 m"},"compacto":{"txt":"2,70 × 1,81 × 2,81 m","livre_txt":"2,40 m","comp_txt":"2,70 m"}}},{"slug":"sombra-da-ria","nome":"Sombra da Ria","leva":["Pilares só nas costas: entrada sem obstáculos","Cobertura larga em consola, que avança para lá da frente","Ripado de madeira termotratada nas costas e na lateral","Banco de madeira com encosto e braços","Vitrine com mapa e horários; jardineira lateral opcional"],"imagem":"sombra-da-ria","estudo":"estudo-sombra-da-ria","modelos":{"normal":"sombra-da-ria","compacto":"sombra-da-ria-compacto"},"dim":{"normal":{"txt":"4,60 × 2,10 × 2,62 m","livre_txt":"2,42 m","comp_txt":"4,60 m"},"compacto":{"txt":"3,10 × 2,10 × 2,62 m","livre_txt":"2,42 m","comp_txt":"3,10 m"}}},{"slug":"cubista","nome":"Cubista","leva":["Volume branco em chapa de aço dobrada, cobertura plana com platibanda","Lateral em chapa perfurada azul, com padrão inspirado no azulejo","Janela quadrada com aro azul nas costas","Mirante com a placa da paragem","Banco de madeira e vitrine com mapa e horários"],"imagem":"cubista","estudo":"estudo-cubista","modelos":{"normal":"cubista","compacto":"cubista-compacto"},"dim":{"normal":{"txt":"4,24 × 1,62 × 3,32 m","livre_txt":"2,45 m","comp_txt":"4,24 m"},"compacto":{"txt":"2,74 × 1,62 × 3,32 m","livre_txt":"2,45 m","comp_txt":"2,74 m"}}},{"slug":"mercado","nome":"Mercado","leva":["Colunas esbeltas em aço verde escuro, com mãos-francesas","Cobertura de duas águas em vidro laminado, com caleiras","Murete em tijolo aparente cor terracota","Vidro nas costas e na lateral, por cima do murete","Banco de madeira e vitrine com mapa e horários"],"imagem":"mercado","estudo":"estudo-mercado","modelos":{"normal":"mercado","compacto":"mercado-compacto"},"dim":{"normal":{"txt":"4,22 × 2,06 × 3,22 m","livre_txt":"2,40 m","comp_txt":"4,22 m"},"compacto":{"txt":"2,72 × 2,06 × 3,22 m","livre_txt":"2,40 m","comp_txt":"2,72 m"}}}],"niveis":[{"slug":"abrigo","nome":"Abrigo","inclui":["Banco com encosto e braços (3 lugares no normal, 2 no compacto)","Vitrine com horários e mapa","Código QR com o percurso","Zona para cadeira de rodas","Faixa de piso tátil de alerta junto ao lancil, em frente ao abrigo"],"acrescenta":[],"resumo":""},{"slug":"solar","nome":"Solar","inclui":["Tudo o do nível Abrigo","Painéis solares e bateria: energia própria","Iluminação LED que acende ao entardecer e reforça quando há pessoas","Duas tomadas USB-C para carregar o telemóvel"],"acrescenta":["painéis solares e bateria","iluminação LED com sensor crepuscular e de presença","carregamento USB-C"],"resumo":"solar, luz LED e USB-C"},{"slug":"informacao","nome":"Informação","inclui":["Tudo o do nível Solar","Ecrã de informação ao passageiro","Placa com código QR e NFC"],"acrescenta":["painéis solares e bateria","iluminação LED com sensor crepuscular e de presença","carregamento USB-C","ecrã de informação ao passageiro","placa QR/NFC"],"resumo":"solar, luz LED, USB-C, ecrã e placa QR/NFC"}],"tamanhos":[{"slug":"normal","nome":"Normal","lugares":3},{"slug":"compacto","nome":"Compacto","lugares":2}],"opcoes":[{"slug":"mupi","nome":"MUPI retroiluminado de dupla face"},{"slug":"bicicletas","nome":"Suporte de bicicletas"},{"slug":"cobertura-verde","nome":"Cobertura verde"},{"slug":"bebedouro","nome":"Bebedouro"},{"slug":"botao-de-apoio","nome":"Botão de apoio"}],"fotos":{"essencial/abrigo":{"imagem":"essencial","exata":true},"essencial/solar":{"imagem":"essencial","exata":false},"essencial/informacao":{"imagem":"essencial-informacao-mupi","exata":true},"sombra-da-ria/abrigo":{"imagem":"sombra-da-ria","exata":true},"sombra-da-ria/solar":{"imagem":"sombra-da-ria-solar-luz","exata":true},"sombra-da-ria/informacao":{"imagem":"sombra-da-ria-solar","exata":false},"cubista/abrigo":{"imagem":"cubista","exata":true},"cubista/solar":{"imagem":"cubista","exata":false},"cubista/informacao":{"imagem":"cubista-informacao","exata":true},"mercado/abrigo":{"imagem":"mercado","exata":true},"mercado/solar":{"imagem":"mercado","exata":false},"mercado/informacao":{"imagem":"mercado","exata":false}},"variantes":{"essencial/normal/informacao":"essencial-informacao-mupi"},"dimVariante":{"txt":"4,20 × 1,81 × 2,85 m","livre_txt":"2,40 m","comp_txt":"4,20 m"},"narracao":{"capitulos":[{"titulo":"Desenhos","inicio":10.04,"paragrafo":1},{"titulo":"Níveis","inicio":52.18,"paragrafo":2},{"titulo":"Tamanhos","inicio":73.94,"paragrafo":3},{"titulo":"Opções","inicio":80.7,"paragrafo":4},{"titulo":"Próximos passos","inicio":102.34,"paragrafo":5}],"audio":"assets/narracao.mp3","duracao":112.6}}</script>
+<script type="application/json" id="dados">{"modo":"publico","embebido":false,"ativos":{"img":{"olhao-ao-entardecer":{"l":[640,1024,1600,2048,2688],"w":2688,"h":1520,"jpeg":"olhao-ao-entardecer-1200.jpg","alt":"Olhão vista do alto ao fim da tarde: casas cubistas e a Ria Formosa"},"olhao-ao-entardecer-vertical":{"l":[720,1080],"w":1520,"h":2688,"jpeg":"olhao-ao-entardecer-vertical-1200.jpg","alt":"Olhão vista do alto ao fim da tarde: casas cubistas e a Ria Formosa"},"essencial-informacao-mupi":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"essencial-informacao-mupi-1200.jpg","alt":"Abrigo Essencial no nível Informação, com painéis solares, ecrã e MUPI"},"sombra-da-ria-solar-luz":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"sombra-da-ria-solar-luz-1200.jpg","alt":"Abrigo Sombra da Ria no nível Solar: a iluminação LED acende ao entardecer"},"essencial":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"essencial-1200.jpg","alt":"Abrigo Essencial numa rua de Olhão"},"estudo-essencial":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-essencial-1200.jpg","alt":"Estudo 3D do abrigo Essencial, em perspetiva, com uma pessoa à escala"},"essencial-rua":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"essencial-rua-1200.jpg","alt":"Abrigo Essencial: aço grafite e vidro laminado"},"estudo-essencial-frente":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-essencial-frente-1200.jpg","alt":"Estudo 3D do abrigo Essencial, vista de frente"},"estudo-essencial-lado":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-essencial-lado-1200.jpg","alt":"Estudo 3D do abrigo Essencial, vista lateral"},"movimento-essencial-poster":{"l":[480,800,1280],"w":1920,"h":1080,"jpeg":"movimento-essencial-poster-1200.jpg","alt":""},"sombra-da-ria":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"sombra-da-ria-1200.jpg","alt":"Abrigo Sombra da Ria junto à Ria Formosa"},"estudo-sombra-da-ria":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-sombra-da-ria-1200.jpg","alt":"Estudo 3D do abrigo Sombra da Ria, em perspetiva, com uma pessoa à escala"},"sombra-da-ria-passeio":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"sombra-da-ria-passeio-1200.jpg","alt":"Abrigo Sombra da Ria: ripado de madeira e cobertura em consola"},"sombra-da-ria-solar":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"sombra-da-ria-solar-1200.jpg","alt":"Abrigo Sombra da Ria no nível Solar, ao entardecer, com a iluminação LED acesa"},"estudo-sombra-da-ria-frente":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-sombra-da-ria-frente-1200.jpg","alt":"Estudo 3D do abrigo Sombra da Ria, vista de frente"},"movimento-sombra-da-ria-poster":{"l":[480,800,1280],"w":1920,"h":1080,"jpeg":"movimento-sombra-da-ria-poster-1200.jpg","alt":""},"cubista":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"cubista-1200.jpg","alt":"Abrigo Cubista numa rua de casas brancas"},"estudo-cubista":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-cubista-1200.jpg","alt":"Estudo 3D do abrigo Cubista, em perspetiva, com uma pessoa à escala"},"cubista-rua":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"cubista-rua-1200.jpg","alt":"Abrigo Cubista: painel perfurado azul e janela com aro azul"},"cubista-informacao":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"cubista-informacao-1200.jpg","alt":"Abrigo Cubista no nível Informação, à hora azul, com ecrã, iluminação e painel azul iluminado"},"estudo-cubista-frente":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-cubista-frente-1200.jpg","alt":"Estudo 3D do abrigo Cubista, vista de frente"},"cubista-noite":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"cubista-noite-1200.jpg","alt":"Abrigo Cubista no nível Informação, à hora azul, com iluminação LED"},"movimento-cubista-poster":{"l":[480,800,1280],"w":1920,"h":1080,"jpeg":"movimento-cubista-poster-1200.jpg","alt":""},"mercado":{"l":[480,800,1200,1600,2048],"w":2048,"h":1360,"jpeg":"mercado-1200.jpg","alt":"Abrigo Mercado junto aos Mercados de Olhão"},"estudo-mercado":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-mercado-1200.jpg","alt":"Estudo 3D do abrigo Mercado, em perspetiva, com uma pessoa à escala"},"mercado-ria":{"l":[480,800,1200,1600,1920],"w":1920,"h":1080,"jpeg":"mercado-ria-1200.jpg","alt":"Abrigo Mercado: colunas verdes, vidro e murete de tijolo"},"estudo-mercado-frente":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-mercado-frente-1200.jpg","alt":"Estudo 3D do abrigo Mercado, vista de frente"},"estudo-mercado-lado":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-mercado-lado-1200.jpg","alt":"Estudo 3D do abrigo Mercado, vista lateral"},"estudo-mercado-compacto":{"l":[480,800,1200,1600],"w":2000,"h":1250,"jpeg":"estudo-mercado-compacto-1200.jpg","alt":"Estudo 3D do abrigo Mercado compacto, em perspetiva, com uma pessoa à escala"},"movimento-mercado-poster":{"l":[480,800,1280],"w":1920,"h":1080,"jpeg":"movimento-mercado-poster-1200.jpg","alt":""},"video-olhao":{"l":[800,1280,1920],"w":1920,"h":1080,"jpeg":"video-olhao-1200.jpg","alt":"Abrigos de passageiros para Olhão"}},"video":{"abertura":"assets/video/abertura.mp4","nivel-solar":"assets/video/nivel-solar.mp4","movimento-essencial":"assets/video/movimento-essencial.mp4","movimento-sombra-da-ria":"assets/video/movimento-sombra-da-ria.mp4","movimento-cubista":"assets/video/movimento-cubista.mp4","movimento-mercado":"assets/video/movimento-mercado.mp4","completo":{"720":"assets/video/video-olhao-720.mp4","1080":"assets/video/video-olhao-1080.mp4"},"completoPoster":"assets/img/video-olhao-1280.webp","legendas":"assets/video/legendas-pt.vtt"},"glb":{"essencial":{"glb":"assets/3d/essencial.glb","gz":"assets/3d/essencial.glb.gz"},"essencial-compacto":{"glb":"assets/3d/essencial-compacto.glb","gz":"assets/3d/essencial-compacto.glb.gz"},"sombra-da-ria":{"glb":"assets/3d/sombra-da-ria.glb","gz":"assets/3d/sombra-da-ria.glb.gz"},"sombra-da-ria-compacto":{"glb":"assets/3d/sombra-da-ria-compacto.glb","gz":"assets/3d/sombra-da-ria-compacto.glb.gz"},"cubista":{"glb":"assets/3d/cubista.glb","gz":"assets/3d/cubista.glb.gz"},"cubista-compacto":{"glb":"assets/3d/cubista-compacto.glb","gz":"assets/3d/cubista-compacto.glb.gz"},"mercado":{"glb":"assets/3d/mercado.glb","gz":"assets/3d/mercado.glb.gz"},"mercado-compacto":{"glb":"assets/3d/mercado-compacto.glb","gz":"assets/3d/mercado-compacto.glb.gz"},"essencial-informacao-mupi":{"glb":"assets/3d/essencial-informacao-mupi.glb","gz":"assets/3d/essencial-informacao-mupi.glb.gz"}},"visor":"assets/visor3d.js"},"desenhos":[{"slug":"essencial","nome":"Essencial","estudo":"estudo-essencial","modelos":{"normal":"essencial","compacto":"essencial-compacto"},"dim":{"normal":{"txt":"4,20 × 1,81 × 2,81 m","livre_txt":"2,40 m","comp_txt":"4,20 m"},"compacto":{"txt":"2,70 × 1,81 × 2,81 m","livre_txt":"2,40 m","comp_txt":"2,70 m"}}},{"slug":"sombra-da-ria","nome":"Sombra da Ria","estudo":"estudo-sombra-da-ria","modelos":{"normal":"sombra-da-ria","compacto":"sombra-da-ria-compacto"},"dim":{"normal":{"txt":"4,60 × 2,10 × 2,62 m","livre_txt":"2,42 m","comp_txt":"4,60 m"},"compacto":{"txt":"3,10 × 2,10 × 2,62 m","livre_txt":"2,42 m","comp_txt":"3,10 m"}}},{"slug":"cubista","nome":"Cubista","estudo":"estudo-cubista","modelos":{"normal":"cubista","compacto":"cubista-compacto"},"dim":{"normal":{"txt":"4,24 × 1,62 × 3,32 m","livre_txt":"2,45 m","comp_txt":"4,24 m"},"compacto":{"txt":"2,74 × 1,62 × 3,32 m","livre_txt":"2,45 m","comp_txt":"2,74 m"}}},{"slug":"mercado","nome":"Mercado","estudo":"estudo-mercado","modelos":{"normal":"mercado","compacto":"mercado-compacto"},"dim":{"normal":{"txt":"4,22 × 2,06 × 3,22 m","livre_txt":"2,40 m","comp_txt":"4,22 m"},"compacto":{"txt":"2,72 × 2,06 × 3,22 m","livre_txt":"2,40 m","comp_txt":"2,72 m"}}}],"niveis":[{"slug":"abrigo","nome":"Abrigo","resumo":""},{"slug":"solar","nome":"Solar","resumo":"solar, luz LED e USB-C"},{"slug":"informacao","nome":"Informação","resumo":"solar, luz LED, USB-C, ecrã e placa QR/NFC"}],"tamanhos":[{"slug":"normal","nome":"Normal"},{"slug":"compacto","nome":"Compacto"}],"opcoes":[{"slug":"mupi","nome":"MUPI retroiluminado de dupla face"},{"slug":"bicicletas","nome":"Suporte de bicicletas"},{"slug":"cobertura-verde","nome":"Cobertura verde"},{"slug":"bebedouro","nome":"Bebedouro"},{"slug":"botao-de-apoio","nome":"Botão de apoio"}],"variantes":{"essencial/normal/informacao":"essencial-informacao-mupi"},"dimVariante":{"txt":"4,20 × 1,81 × 2,85 m","livre_txt":"2,40 m","comp_txt":"4,20 m"},"narracao":{"capitulos":[{"titulo":"Desenhos","inicio":10.04,"paragrafo":1},{"titulo":"Níveis","inicio":52.18,"paragrafo":2},{"titulo":"Tamanhos","inicio":73.94,"paragrafo":3},{"titulo":"Opções","inicio":80.7,"paragrafo":4},{"titulo":"Próximos passos","inicio":102.34,"paragrafo":5}],"audio":"assets/narracao.mp3","duracao":110.6}}</script>
 
 <script>(function () {
   'use strict';
@@ -981,25 +901,6 @@ a{color:inherit}
   function juntar(l) { return l.length < 2 ? l.join('') : l.slice(0, -1).join(', ') + ' e ' + l[l.length - 1]; }
   function ecraGrande() { return window.matchMedia('(min-width: 1024px) and (hover: hover)').matches; }
   function mmss(s) { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
-
-  var avisoT = null;
-  // o aviso aparece por cima do botão que o pediu (dentro do diálogo aberto, se houver), sem tapar contactos nem texto
-  function aviso(txt, ancora) {
-    var el = $('[data-aviso]'); if (!el) return;
-    var aberto = document.querySelector('dialog[open]');
-    (aberto || document.body).appendChild(el);
-    el.textContent = txt; el.hidden = false;
-    el.classList.remove('aviso--ancorado'); el.style.top = el.style.left = '';
-    if (ancora && ancora.getBoundingClientRect) {
-      var r = ancora.getBoundingClientRect();
-      el.classList.add('aviso--ancorado');
-      var h = el.offsetHeight, w = el.offsetWidth;
-      var topo = r.top - h - 8; if (topo < 8) topo = r.bottom + 8;
-      var esq = Math.max(8, Math.min(window.innerWidth - w - 8, r.left + r.width / 2 - w / 2));
-      el.style.top = Math.round(topo) + 'px'; el.style.left = Math.round(esq) + 'px';
-    }
-    clearTimeout(avisoT); avisoT = setTimeout(function () { el.hidden = true; }, 2600);
-  }
 
   /* ---------- imagens abaixo da abertura: só depois de a fotografia de abertura chegar (ou ao fim de 2,5 s) ---------- */
   (function () {
@@ -1228,32 +1129,10 @@ a{color:inherit}
   }
 
   /* ---------- configurador ---------- */
+  // cada cartão marca-se ao tocar; a escolha fica no endereço (#desenho-nível-tamanho+opções), que reabre a página assim
   var E = { desenho: null, nivel: null, tamanho: null, opcoes: [] };
   var mexeu = false;
 
-  function fotoCombinacao() {
-    var d = porId(D.desenhos, E.desenho); if (!d) return null;
-    var nv = E.nivel || 'abrigo';
-    return D.fotos[d.slug + '/' + nv] || { imagem: d.imagem, exata: nv === 'abrigo' };
-  }
-  function legendaCombinacao(f) {
-    var d = porId(D.desenhos, E.desenho), n = porId(D.niveis, E.nivel);
-    if (!d) return 'Escolha um desenho para ver aqui a sua combinação.';
-    if (!n) return 'Imagem ilustrativa do desenho ' + d.nome + '.';
-    var t;
-    if (f.exata) t = 'Imagem ilustrativa: ' + d.nome + ', nível ' + n.nome + '.';
-    else {
-      var base = f.imagem === 'sombra-da-ria-solar' ? 'nível Solar' : 'nível Abrigo';
-      t = 'Imagem ilustrativa do ' + d.nome + ' no ' + base + '. O nível ' + n.nome + ' acrescenta ' + juntar(n.slug === 'informacao' && base === 'nível Solar' ? ['ecrã de informação ao passageiro', 'placa QR/NFC'] : n.acrescenta) + '.';
-    }
-    if (f.imagem === 'essencial-informacao-mupi' && E.opcoes.indexOf('mupi') < 0) t += ' Na imagem, com o MUPI (opção).';
-    return t;
-  }
-  function tituloEscolha() {
-    var d = porId(D.desenhos, E.desenho), n = porId(D.niveis, E.nivel), t = porId(D.tamanhos, E.tamanho);
-    var p = []; if (d) p.push(d.nome); if (n) p.push(n.nome); if (t) p.push(t.nome);
-    return p.length ? p.join('\u00a0· ') : 'Ainda sem escolha';
-  }
   function modeloPara(slug, tamanho, variante) {
     var d = porId(D.desenhos, slug); if (!d) return null;
     var chave = slug + '/' + (tamanho || 'normal') + '/' + variante;
@@ -1284,10 +1163,7 @@ a{color:inherit}
     var h = hashEscolha();
     history.replaceState(null, '', h ? '#' + h : location.pathname + location.search);
   }
-  function ligacaoEscolha() { var h = hashEscolha(); return location.href.split('#')[0] + (h ? '#' + h : ''); }
 
-  var fotoR = $('[data-resumo-foto]'), mosaico = $('[data-mosaico]'), barraEsc = $('[data-barra-escolha]');
-  var fotoAtual = null;
   function render() {
     $$('[data-desenho]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-desenho') === E.desenho ? 'true' : 'false'); });
     $$('[data-nivel]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-nivel') === E.nivel ? 'true' : 'false'); });
@@ -1305,44 +1181,6 @@ a{color:inherit}
       var el = $('[data-medida="' + tm.slug + '"]'); if (!el) return;
       el.textContent = d ? d.dim[tm.slug].comp_txt + ' de comprimento' : (tm.slug === 'normal' ? 'Para passeios largos' : 'Para passeios estreitos');
     });
-    // fotografia
-    var f = fotoCombinacao();
-    if (f) {
-      if (fotoAtual !== f.imagem) { porImagem(fotoR, f.imagem, 900, '(min-width:1024px) 420px, 100vw'); fotoAtual = f.imagem; }
-      fotoR.hidden = false; mosaico.hidden = true;
-    } else { fotoR.hidden = true; mosaico.hidden = false; fotoAtual = null; }
-    $('[data-resumo-legenda]').textContent = f ? legendaCombinacao(f) : 'Escolha um desenho para ver aqui a sua combinação.';
-    $('[data-resumo-titulo]').textContent = tituloEscolha();
-    $('[data-resumo-passos]').innerHTML = [['Desenho', d], ['Nível', n], ['Tamanho', t]].map(function (x) {
-      return '<li class="' + (x[1] ? 'feito' : '') + '">' + x[0] + (x[1] ? '' : ': por escolher') + '</li>';
-    }).join('');
-    // o que leva
-    var leva = '';
-    if (d) leva += '<div><h4>Desenho ' + esc(d.nome) + '</h4><ul>' + d.leva.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
-    if (n) {
-      var inc = n.inclui.filter(function (x) { return x.indexOf('Tudo o do') !== 0; });
-      if (n.slug !== 'abrigo') leva += '<div><h4>Nível ' + esc(n.nome) + ' acrescenta</h4><ul>' + n.acrescenta.map(function (x) { return '<li>' + esc(x.charAt(0).toUpperCase() + x.slice(1)) + '</li>'; }).join('') + '</ul></div>';
-      else leva += '<div><h4>Nível Abrigo</h4><ul>' + inc.slice(1).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '<li>Sem eletricidade nem ecrã</li></ul></div>';
-    }
-    var ops = D.opcoes.filter(function (o) { return E.opcoes.indexOf(o.slug) >= 0; });
-    if (ops.length) leva += '<div><h4>Opções</h4><ul>' + ops.map(function (o) { return '<li>' + esc(o.nome) + '</li>'; }).join('') + '</ul></div>';
-    $('[data-resumo-leva]').innerHTML = leva;
-    // medidas
-    var med = '';
-    if (d) {
-      if (t) {
-        var dm = d.dim[t.slug];
-        med += '<div><dt>Comprimento × profundidade × altura</dt><dd>' + esc(dm.txt) + '</dd></div><div><dt>Altura livre</dt><dd>' + esc(dm.livre_txt) + '</dd></div><div><dt>Lugares sentados</dt><dd>' + t.lugares + '</dd></div>';
-      } else {
-        med += '<div><dt>Normal · 3 lugares</dt><dd>' + esc(d.dim.normal.txt) + '</dd></div><div><dt>Compacto · 2 lugares</dt><dd>' + esc(d.dim.compacto.txt) + '</dd></div>';
-      }
-    }
-    $('[data-resumo-medidas]').innerHTML = med;
-        $('[data-ver-3d]').disabled = !d;
-    // barra fixa
-    var bf = $('[data-barra-foto]');
-    if (f) { porImagem(bf, f.imagem, 160, '56px'); bf.hidden = false; } else bf.hidden = true;
-    $('[data-barra-texto]').textContent = d ? tituloEscolha() : 'Escolha um desenho';
     escreverHash();
   }
   function escolher(tipo, valor) {
@@ -1360,61 +1198,11 @@ a{color:inherit}
     b.addEventListener('click', function () { escolher('desenho', b.getAttribute('data-escolher-desenho')); irPara('passo-nivel'); });
   });
 
-  // barra fixa da escolha: só enquanto o configurador está à vista e o resumo não
-  if (barraEsc && 'IntersectionObserver' in window) {
-    var vistoCfg = false, vistoRes = false;
-    var atualizarBarra = function () { var mostrar = vistoCfg && !vistoRes && window.innerWidth < 1024; barraEsc.hidden = !mostrar; document.body.classList.toggle('com-barra-escolha', mostrar); };
-    new IntersectionObserver(function (es) { es.forEach(function (en) { vistoCfg = en.isIntersecting; }); atualizarBarra(); }, { rootMargin: '-30% 0px -30% 0px' }).observe($('.config__passos'));
-    new IntersectionObserver(function (es) { es.forEach(function (en) { vistoRes = en.isIntersecting; }); atualizarBarra(); }, { threshold: 0.15 }).observe($('#resumo'));
-    window.addEventListener('resize', atualizarBarra);
-  }
-
-  // copiar
-  function copiar(texto, ok, ancora) {
-    var feito = function () { aviso(ok, ancora); };
-    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(feito, function () { copiarAntigo(texto); feito(); });
-    else { copiarAntigo(texto); feito(); }
-  }
-  function copiarAntigo(texto) {
-    var ta = document.createElement('textarea'); ta.value = texto; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) { } document.body.removeChild(ta);
-  }
-  $('[data-copiar-ligacao]').addEventListener('click', function () { mexeu = true; escreverHash(); copiar(ligacaoEscolha(), 'Ligação copiada', this); });
-
-  // falar connosco
-  var dFalar = $('#dlg-falar');
-  function textoResumo() {
-    var d = porId(D.desenhos, E.desenho), n = porId(D.niveis, E.nivel), t = porId(D.tamanhos, E.tamanho);
-    var l = ['Abrigos de passageiros para Olhão', ''];
-    l.push('Desenho: ' + (d ? d.nome : 'por escolher'));
-    l.push('Nível: ' + (n ? n.nome : 'por escolher'));
-    l.push('Tamanho: ' + (t ? t.nome + ' (' + t.lugares + ' lugares)' : 'por escolher'));
-    var ops = D.opcoes.filter(function (o) { return E.opcoes.indexOf(o.slug) >= 0; }).map(function (o) { return o.nome; });
-    l.push('Opções: ' + (ops.length ? ops.join('; ') : 'nenhuma'));
-    if (d && t) l.push('Dimensões (C × P × A): ' + d.dim[t.slug].txt);
-    l.push('Número de abrigos com esta escolha: ');
-    l.push('Locais: ');
-    l.push('');
-    l.push('Ligação: ' + ligacaoEscolha());
-    return l.join('\n');
-  }
-  $('[data-falar]').addEventListener('click', function () {
-    mexeu = true; escreverHash();
-    var txt = textoResumo();
-    $('[data-falar-texto]').value = txt;
-    $('[data-email]').href = 'mailto:' + D.email + '?subject=' + encodeURIComponent('Abrigos de passageiros para Olhão: ' + tituloEscolha()) + '&body=' + encodeURIComponent(txt);
-    abrirDialogo(dFalar);
-  });
-  $('[data-copiar-resumo]').addEventListener('click', function () { copiar($('[data-falar-texto]').value, 'Resumo copiado', this); });
-  $('[data-falar-texto]').addEventListener('input', function () {
-    $('[data-email]').href = 'mailto:' + D.email + '?subject=' + encodeURIComponent('Abrigos de passageiros para Olhão: ' + tituloEscolha()) + '&body=' + encodeURIComponent(this.value);
-  });
-
   // escolha vinda do endereço
   function aplicarHash(rolar) {
     if (!lerHash()) return false;
     mexeu = true; render();
-    if (rolar) setTimeout(function () { irPara(window.innerWidth < 1024 ? 'resumo' : 'escolher'); }, 60);
+    if (rolar) setTimeout(function () { irPara('escolher'); }, 60);
     return true;
   }
   aplicarHash(true) || render();
@@ -1697,11 +1485,6 @@ a{color:inherit}
   $$('[data-v-desenho]').forEach(function (b) { b.addEventListener('click', function () { V.desenho = b.getAttribute('data-v-desenho'); if (V.desenho !== 'essencial') V.variante = 'base'; mostrarModelo(); }); });
   $$('[data-v-tamanho]').forEach(function (b) { b.addEventListener('click', function () { V.tamanho = b.getAttribute('data-v-tamanho'); if (V.tamanho !== 'normal') V.variante = 'base'; mostrarModelo(); }); });
   $$('[data-v-variante]').forEach(function (b) { b.addEventListener('click', function () { V.variante = b.getAttribute('data-v-variante'); mostrarModelo(); }); });
-  $('[data-ver-3d]').addEventListener('click', function () {
-    if (!E.desenho) return;
-    var variante = E.desenho === 'essencial' && (E.tamanho || 'normal') === 'normal' && E.nivel === 'informacao' ? 'informacao' : 'base';
-    abrir3d(E.desenho, E.tamanho || 'normal', variante);
-  });
   $$('[data-3d-desenho]').forEach(function (b) { b.addEventListener('click', function () { abrir3d(b.getAttribute('data-3d-desenho'), 'normal', 'base'); }); });
 })();
 </script>
