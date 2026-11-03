@@ -118,10 +118,10 @@ main{max-width:1180px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-ri
 <main id="principal">
   <form class="entrada" id="entrada" autocomplete="off">
     <h2>Entrar</h2>
-    <p>Escreve o código de acesso que recebeste.</p>
+    <p>Escreve o código de acesso que recebeste. Maiúsculas, acentos e espaços não contam.</p>
     <div class="campo">
       <label for="codigo">Código de acesso</label>
-      <input id="codigo" name="codigo" type="password" inputmode="text" autocapitalize="off" spellcheck="false" required>
+      <input id="codigo" name="codigo" type="text" inputmode="text" autocapitalize="off" autocomplete="off" spellcheck="false" required>
     </div>
     <label class="chk"><input type="checkbox" id="lembrar" checked> Lembrar neste aparelho</label>
     <button class="btn pri" type="submit" id="entrar" style="width:100%">Entrar</button>
@@ -173,7 +173,7 @@ main{max-width:1180px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-ri
 
 <script>
 "use strict";
-const CONF = {"sal": "/S4A+AC//8nDsIwNic1fQg==", "iteracoes": 400000, "servico": null};
+const CONF = {"sal": "/S4A+AC//8nDsIwNic1fQg==", "iteracoes": 600000, "servico": null};
 (() => {
   const $ = s => document.querySelector(s);
   const enc = new TextEncoder(), dec = new TextDecoder();
@@ -186,8 +186,10 @@ const CONF = {"sal": "/S4A+AC//8nDsIwNic1fQg==", "iteracoes": 400000, "servico":
                del(k) { try { localStorage.removeItem(k); } catch (e) {} } };
 
   // ---------- cifra (PBKDF2-SHA256 + AES-256-GCM, conteúdo comprimido em gzip) ----------
+  // maiúsculas, acentos, espaços e hífenes não contam (igual ao gerador)
+  const normalizarCodigo = c => c.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\s\-_.]+/g, "");
   async function derivar(codigo) {
-    const base = await crypto.subtle.importKey("raw", enc.encode(codigo), "PBKDF2", false, ["deriveKey"]);
+    const base = await crypto.subtle.importKey("raw", enc.encode(normalizarCodigo(codigo)), "PBKDF2", false, ["deriveKey"]);
     return crypto.subtle.deriveKey({name: "PBKDF2", hash: "SHA-256", salt: b64(CONF.sal), iterations: CONF.iteracoes},
       base, {name: "AES-GCM", length: 256}, true, ["decrypt"]);
   }
