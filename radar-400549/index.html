@@ -15,6 +15,7 @@
   --prazo-fundo:#FDF1D6;--prazo-tinta:#4D3800;
   --ab-fundo:#E2F0E5;--ab-tinta:#1D6331;--cond-fundo:#FDF1D6;--cond-tinta:#7A4F00;
   --novo-fundo:#1F5FA8;--novo-tinta:#FFFFFF;--mau-fundo:#F9E4E1;--mau-tinta:#9B2C1E;--aviso-tinta:#7A4F00;
+  --av-fundo:#1D6331;--av-tinta:#FFFFFF;
   --foco:#1F5FA8;--sombra:0 1px 2px rgba(24,33,44,.06),0 4px 14px rgba(24,33,44,.06);
   color-scheme:light;
 }
@@ -22,12 +23,14 @@
   --azul:#8DB8EE;--azul-forte:#0E2A4A;--azul-suave:#1B2D44;--fundo:#10161D;--cartao:#18212B;--linha:#2A3644;
   --tinta:#E7ECF2;--tinta-2:#C5CFDA;--mudo:#9AA7B6;--prazo-fundo:#3A2E12;--prazo-tinta:#F5DFA8;
   --ab-fundo:#173323;--ab-tinta:#9BDBAC;--cond-fundo:#3A2E12;--cond-tinta:#F0C66B;--novo-fundo:#8DB8EE;--novo-tinta:#0B1622;
-  --mau-fundo:#3B1D19;--mau-tinta:#F2A193;--aviso-tinta:#F0C66B;--foco:#8DB8EE;--sombra:0 1px 2px rgba(0,0,0,.35);color-scheme:dark}}
+  --mau-fundo:#3B1D19;--mau-tinta:#F2A193;--aviso-tinta:#F0C66B;--foco:#8DB8EE;--sombra:0 1px 2px rgba(0,0,0,.35);
+  --av-fundo:#9BDBAC;--av-tinta:#0B1622;color-scheme:dark}}
 :root[data-theme="dark"]{
   --azul:#8DB8EE;--azul-forte:#0E2A4A;--azul-suave:#1B2D44;--fundo:#10161D;--cartao:#18212B;--linha:#2A3644;
   --tinta:#E7ECF2;--tinta-2:#C5CFDA;--mudo:#9AA7B6;--prazo-fundo:#3A2E12;--prazo-tinta:#F5DFA8;
   --ab-fundo:#173323;--ab-tinta:#9BDBAC;--cond-fundo:#3A2E12;--cond-tinta:#F0C66B;--novo-fundo:#8DB8EE;--novo-tinta:#0B1622;
-  --mau-fundo:#3B1D19;--mau-tinta:#F2A193;--aviso-tinta:#F0C66B;--foco:#8DB8EE;--sombra:0 1px 2px rgba(0,0,0,.35);color-scheme:dark}
+  --mau-fundo:#3B1D19;--mau-tinta:#F2A193;--aviso-tinta:#F0C66B;--foco:#8DB8EE;--sombra:0 1px 2px rgba(0,0,0,.35);
+  --av-fundo:#9BDBAC;--av-tinta:#0B1622;color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;min-height:100vh;background:var(--fundo);color:var(--tinta);
@@ -65,7 +68,9 @@ main{padding-top:20px;padding-bottom:calc(36px + env(safe-area-inset-bottom,0px)
 .erro{color:var(--mau-tinta);font-weight:700;min-height:1.5em;margin:10px 0 0}
 /* separadores */
 .seps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 14px}
+.seps .sep.top{grid-column:1/-1}
 @media (max-width:639px){.seps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.seps.com-top{grid-template-columns:minmax(0,1.35fr) repeat(4,minmax(0,1fr))}.seps .sep.top{grid-column:auto}}
 .sep{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:52px;padding:8px 14px;border-radius:12px;
   border:1px solid var(--linha);background:var(--cartao);cursor:pointer;text-align:left;font-weight:700;color:var(--tinta)}
 .sep .n{flex:none;min-width:32px;padding:2px 8px;border-radius:999px;background:var(--azul-suave);color:var(--tinta);font-size:14px;text-align:center}
@@ -106,6 +111,60 @@ main{padding-top:20px;padding-bottom:calc(36px + env(safe-area-inset-bottom,0px)
 .chip.neutro{background:var(--azul-suave);color:var(--tinta)}
 .linha.passada{box-shadow:none;background:transparent}
 .vazio{color:var(--mudo);padding:18px 4px}
+.chip.av{background:var(--av-fundo);color:var(--av-tinta)}
+/* mais interessantes */
+.dest{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding:16px;border-radius:14px;border:1px solid var(--linha);
+  background:var(--cartao);box-shadow:var(--sombra)}
+.d-cab{display:grid;grid-template-columns:36px minmax(0,1fr);gap:6px 12px;align-items:start}
+.d-num{grid-row:1/span 3;width:36px;height:36px;border-radius:50%;background:var(--azul-forte);color:#FFFFFF;font-weight:700;
+  font-size:16px;display:flex;align-items:center;justify-content:center}
+.d-chips{display:flex;flex-wrap:wrap;gap:6px;min-height:26px;align-items:center}
+.d-ent{font-size:13px;color:var(--mudo);font-weight:700;letter-spacing:.01em;overflow-wrap:anywhere}
+.d-tit{margin:0;font-size:17px;line-height:1.35;font-weight:700;overflow-wrap:anywhere}
+.d-tit::first-letter{text-transform:uppercase}
+.d-pe{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 14px;padding:10px 12px;border-radius:10px;background:var(--fundo)}
+.d-pe.val-longo{grid-template-columns:minmax(0,1fr)}
+.d-pe>div{display:flex;flex-direction:column;min-width:0;font-size:14px;overflow-wrap:anywhere}
+.d-pe .d-pz{font-size:15px;font-weight:700}
+.d-pe>.d-pn{grid-column:1/-1;font-size:13px;color:var(--tinta-2)}
+.razoes{margin:0;display:grid;gap:12px}
+.razoes dt{margin:0 0 3px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--azul)}
+.razoes dd{margin:0;font-size:15px;overflow-wrap:anywhere}
+.razoes ul{margin:0;padding-left:18px}
+.razoes li+li{margin-top:3px}
+.razoes p{margin:0}
+.d-nota{padding:8px 10px;border-left:3px solid var(--azul);border-radius:0 8px 8px 0;background:var(--azul-suave);color:var(--tinta)}
+.razoes .d-nota+ul{margin-top:8px}
+.razoes .d-origem{margin-top:4px;font-size:13px;color:var(--mudo)}
+@media (max-width:639px){
+  /* no telemóvel as frases automáticas vão seguidas, para o cartão não ficar comprido */
+  .razoes ul{padding-left:0;list-style:none}
+  .razoes li{display:inline}
+  .razoes li+li{margin-top:0}
+  .razoes li+li::before{content:" "}
+}
+.d-nota .de{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-2)}
+.d-contas{border-top:1px solid var(--linha)}
+.d-contas>summary{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;min-height:44px;padding:6px 0;cursor:pointer;
+  font-size:14px;font-weight:700;color:var(--tinta-2)}
+.d-contas>summary::-webkit-details-marker{display:none}
+.d-contas>summary::before{content:"";flex:none;width:8px;height:8px;margin-right:2px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg)}
+.d-contas[open]>summary::before{transform:rotate(45deg)}
+.d-contas .d-ver{font-weight:400;color:var(--mudo)}
+.d-contas ul{list-style:none;margin:0 0 4px;padding:0;font-size:14px}
+.d-contas li{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-top:1px solid var(--linha)}
+.d-contas li b{flex:none;font-variant-numeric:tabular-nums}
+.d-contas li.total{font-weight:700}
+.d-abrir{width:100%}
+@media (min-width:820px){
+  .lista.dests{gap:12px;border:0;border-radius:0;overflow:visible;background:transparent;box-shadow:none}
+  .dest{grid-template-columns:minmax(0,1fr) 260px;grid-template-areas:"cab pe" "razoes pe" "contas abrir";column-gap:24px;padding:20px;align-items:start}
+  .d-cab{grid-area:cab}.d-pe{grid-area:pe;grid-template-columns:minmax(0,1fr)}.razoes.d-r{grid-area:razoes}
+  .d-contas{grid-area:contas}.d-abrir{grid-area:abrir;align-self:end}
+}
+@media (min-width:1100px){.razoes.d-r{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px 28px;align-items:start}}
+.f-dest{margin:0 0 4px;padding:14px 16px;border:1px solid var(--linha);border-radius:12px;background:var(--cartao)}
+.f-dest h2{margin-top:0}
 @media (min-width:820px){
   .cabecalho{display:grid;grid-template-columns:minmax(0,1fr) 150px 160px 136px;gap:14px;padding:0 17px 6px;
     font-size:12px;color:var(--mudo);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
@@ -190,6 +249,7 @@ details.caixa .dentro .lista{box-shadow:none}
           <input id="procura" type="search" placeholder="Entidade, objeto ou país" autocomplete="off" spellcheck="false">
         </div>
         <div class="alt-grupo" role="group" aria-label="Mostrar e ordenar">
+          <button class="tog" type="button" id="so-avancar" aria-pressed="false" hidden>Dá para avançar já</button>
           <button class="tog" type="button" id="so-novos" aria-pressed="false">Só novos</button>
           <button class="tog" type="button" id="ordem" aria-pressed="false">Ordenar por prazo</button>
         </div>
@@ -204,6 +264,11 @@ details.caixa .dentro .lista{box-shadow:none}
           <p class="nota" style="margin:0 0 12px">Concursos cujo prazo de proposta já terminou (até 30 dias). Saem da lista sozinhos, pela hora de Lisboa.</p>
           <ul class="lista" id="hist-lista"></ul>
         </div>
+      </details>
+      <details class="caixa sobre" id="como" hidden>
+        <summary>Como são escolhidos</summary>
+        <div class="dentro"><p id="como-txt"></p>
+          <p>Cada concurso mostra a pontuação e as contas. O separador é refeito às 08:00 e às 20:00; quem passa de prazo sai sozinho. Os mesmos concursos continuam no separador do seu mercado.</p></div>
       </details>
       <details class="caixa sobre" id="sobre">
         <summary>Critério e cobertura</summary>
@@ -297,13 +362,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
   const enc = new TextEncoder();
   const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const ub64 = u => btoa(String.fromCharCode(...new Uint8Array(u)));
-  const LS_CHAVE = "4x4r-chave-" + CONF.sal.slice(0, 8), LS_SEP = "4x4r-sep";
+  const LS_CHAVE = "4x4r-chave-" + CONF.sal.slice(0, 8), LS_SEP = "4x4r-sep2", TOP = "top";
   const ls = {get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
               set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
               del(k) { try { localStorage.removeItem(k); } catch (e) {} }};
   const agora = () => new Date();
-  let chave = null, dados = null;
-  const est = {sep: ls.get(LS_SEP) || "pt", q: "", soNovos: false, porPrazo: false};
+  let chave = null, dados = null, porId = new Map();
+  const est = {sep: ls.get(LS_SEP) || "", q: "", soNovos: false, soAvancar: false, porPrazo: false};
 
   // ---------- cifra: PBKDF2-SHA256 → AES-256-GCM, conteúdo em gzip (maiúsculas, acentos, espaços e hífenes não contam)
   const normalizarCodigo = c => c.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[\s\-_.]+/g, "");
@@ -359,6 +424,59 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
   }
   const corresponde = (i, q) => !q || norm(i.ent + " " + i.obj + " " + i.onde + " " + i.f.tit).includes(q);
 
+  // ---------- mais interessantes: os primeiros da ordem gerada que ainda estão em prazo (os seguintes sobem sozinhos)
+  function topAtual(t) {
+    const out = [];
+    if (!dados.dest) return out;
+    for (const d of dados.dest.itens) {
+      const i = porId.get(d.id);
+      if (i && !Prazos.passou(i.prazo, t)) out.push({d, i, n: out.length + 1});
+      if (out.length >= dados.dest.max) break;
+    }
+    return out;
+  }
+  function grupo(titulo, frases, nota, de, texto, origem) {
+    if (!(frases && frases.length) && !nota && !texto) return null;
+    return el("div", null, el("dt", null, titulo), el("dd", null,
+      nota ? el("p", {class: "d-nota"}, el("span", {class: "de"}, de ? "Nota de " + de : "Nota"), nota) : null,
+      frases && frases.length ? el("ul", null, frases.map(x => el("li", null, x))) : null,
+      texto ? el("p", null, texto) : null,
+      texto && origem ? el("p", {class: "d-origem"}, origem) : null));
+  }
+  function razoes(d, cls) {
+    const N = d.nota || {}, i = porId.get(d.id), feita = i && i.f.analise && i.f.analise !== "—" ? "Da análise de " + i.f.analise + "." : null;
+    return el("dl", {class: "razoes" + (cls ? " " + cls : "")},
+      grupo("Porque interessa", d.porque, N.porque, N.de),
+      grupo("O que facilita avançar", d.facilita, N.facilita, N.de),
+      grupo("O que dificulta", d.dificulta, N.dificulta, N.de),
+      grupo("Próximo passo", null, d.passo_nota ? d.passo : null, N.de, d.passo_nota ? null : d.passo, feita));
+  }
+  const sinal = p => (p > 0 ? "+" : p < 0 ? "−" : "") + Math.abs(p);
+  function cartao(x, t) {
+    const {d, i, n} = x, f = faltam(i, t), N = d.nota || {};
+    return el("li", null, el("article", {class: "dest", "aria-labelledby": "d-t-" + i.id},
+      el("div", {class: "d-cab"},
+        el("span", {class: "d-num", "aria-hidden": "true"}, n),
+        el("div", {class: "d-chips"},
+          d.av ? el("span", {class: "chip av"}, "Dá para avançar já") : null,
+          el("span", {class: "chip " + (i.est === "aberta_qualificavel" ? "ab" : "cond")}, i.estt),
+          i.marca === "novo" ? el("span", {class: "chip novo"}, "Novo") : null,
+          i.marca === "alterado" ? el("span", {class: "chip alt"}, "Alterado") : null),
+        el("div", {class: "d-ent"}, i.onde && i.onde !== "—" ? i.onde + " · " + i.ent : i.ent),
+        el("h2", {class: "d-tit", id: "d-t-" + i.id}, el("span", {class: "sr"}, n + ".º: "), i.obj)),
+      el("div", {class: "d-pe" + (i.val.length > 30 ? " val-longo" : "")},
+        el("div", null, el("span", {class: "rot"}, "Prazo (Lisboa)"), el("span", {class: "d-pz"}, i.pz),
+          el("span", {class: "falta " + f.cls}, f.txt)),
+        el("div", null, el("span", {class: "rot"}, "Valor sem IVA"), el("span", null, i.val)),
+        N.prazo_nota ? el("div", {class: "d-pn"}, N.prazo_nota) : null),
+      razoes(d, "d-r"),
+      el("details", {class: "d-contas"},
+        el("summary", null, "Pontuação: " + d.pt + " pontos", el("span", {class: "d-ver"}, "ver as contas")),
+        el("ul", null, d.contas.map(([r, p]) => el("li", null, el("span", null, r), el("b", null, sinal(p)))),
+          el("li", {class: "total"}, el("span", null, "Total"), el("b", null, d.pt)))),
+      el("button", {class: "btn pri d-abrir", type: "button", "data-id": i.id, onclick: () => irParaFicha(i.id)}, "Abrir a ficha completa")));
+  }
+
   // ---------- lista
   function linha(i, t, passada) {
     const f = passada ? {txt: "prazo terminado", cls: "mau"} : faltam(i, t);
@@ -374,10 +492,11 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
       el("span", {class: "l-prazo"}, el("span", {class: "rot"}, "Prazo (Lisboa)"), el("span", null, i.pz),
         el("span", {class: "falta " + f.cls}, f.txt))));
   }
-  function pintarSeparadores(ativos) {
+  function pintarSeparadores(ativos, top) {
     const S = $("#seps");
     if (!S.childElementCount) {
-      for (const s of dados.seps) S.append(el("button", {class: "sep", type: "button", role: "tab", id: "tab-" + s.id, "data-sep": s.id,
+      S.classList.toggle("com-top", !!dados.dest);
+      for (const s of dados.seps) S.append(el("button", {class: "sep" + (s.id === TOP ? " top" : ""), type: "button", role: "tab", id: "tab-" + s.id, "data-sep": s.id,
         "aria-controls": "painel", onclick: () => mudarSeparador(s.id)}, el("span", {class: "nome"}, s.nome), el("span", {class: "n"}, "0")));
       S.addEventListener("keydown", ev => {
         if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(ev.key)) return;
@@ -387,7 +506,7 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
       });
     }
     for (const b of S.children) {
-      const id = b.dataset.sep, n = ativos.filter(i => i.s === id).length, sel = id === est.sep;
+      const id = b.dataset.sep, n = id === TOP ? top.length : ativos.filter(i => i.s === id).length, sel = id === est.sep;
       b.querySelector(".n").textContent = n;
       b.setAttribute("aria-selected", sel ? "true" : "false"); b.tabIndex = sel ? 0 : -1;
       b.setAttribute("aria-label", nomeSep(id) + ": " + n + (n === 1 ? " concurso em prazo" : " concursos em prazo"));
@@ -397,27 +516,41 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
   let assinatura = "";
   function pintar(forcar) {
     if (!dados) return;
-    const t = agora(), {ativos, hist} = partes(t), q = norm(est.q).trim();
-    const doSep = ativos.filter(i => i.s === est.sep), histSep = hist.filter(i => i.s === est.sep);
-    const novos = doSep.filter(i => i.marca === "novo").length;
-    let vis = doSep.filter(i => (!est.soNovos || i.marca === "novo") && corresponde(i, q));
-    vis = est.porPrazo ? vis.slice().sort((a, b) => quando(a.prazo) - quando(b.prazo)) : vis.slice().sort((a, b) => a.o - b.o);
+    const t = agora(), {ativos, hist} = partes(t), top = topAtual(t), noTop = est.sep === TOP;
+    const q = noTop ? "" : norm(est.q).trim();   // nos mais interessantes (até 10) não há procura
+    const doTop = new Map(top.map(x => [x.i.id, x]));
+    const doSep = noTop ? top.map(x => x.i) : ativos.filter(i => i.s === est.sep), histSep = noTop ? [] : hist.filter(i => i.s === est.sep);
+    const novos = doSep.filter(i => i.marca === "novo").length, avancar = top.filter(x => x.d.av).length;
+    let vis = doSep.filter(i => (noTop ? !est.soAvancar || doTop.get(i.id).d.av : !est.soNovos || i.marca === "novo") && corresponde(i, q));
+    vis = est.porPrazo ? vis.slice().sort((a, b) => quando(a.prazo) - quando(b.prazo))
+      : noTop ? vis : vis.slice().sort((a, b) => a.o - b.o);
     const histVis = histSep.filter(i => corresponde(i, q));
-    const assin = JSON.stringify([est, vis.map(i => i.id + faltam(i, t).txt), histVis.map(i => i.id), ativos.length]);
+    const assin = JSON.stringify([est, vis.map(i => i.id + faltam(i, t).txt), histVis.map(i => i.id), ativos.length, top.map(x => x.i.id)]);
     if (!forcar && assin === assinatura) return;
     assinatura = assin;
-    pintarSeparadores(ativos);
+    pintarSeparadores(ativos, top);
+    $("#so-novos").hidden = noTop; $("#so-avancar").hidden = !noTop; $("#como").hidden = !noTop;
+    document.querySelector(".procura").hidden = noTop;
+    document.querySelector(".cabecalho").hidden = noTop;
     $("#so-novos").textContent = "Só novos (" + novos + ")";
     $("#so-novos").setAttribute("aria-pressed", est.soNovos ? "true" : "false");
+    $("#so-avancar").textContent = "Dá para avançar já (" + avancar + ")";
+    $("#so-avancar").setAttribute("aria-pressed", est.soAvancar ? "true" : "false");
     $("#ordem").setAttribute("aria-pressed", est.porPrazo ? "true" : "false");
     $("#ordem").textContent = est.porPrazo ? "Ordenado por prazo" : "Ordenar por prazo";
-    $("#contagem").textContent = doSep.length + (doSep.length === 1 ? " concurso em prazo" : " concursos em prazo") + " · " + novos +
-      (novos === 1 ? " novo" : " novos") + " desde o resumo de " + dados.ultimo_resumo +
+    $("#contagem").textContent = (noTop
+      ? doSep.length + (doSep.length === 1 ? " concurso mais interessante" : " concursos mais interessantes") + " para a 4x4 · " + avancar +
+        (avancar === 1 ? " dá" : " dão") + " para avançar já · escolha automática entre os " + ativos.length + " em prazo"
+      : doSep.length + (doSep.length === 1 ? " concurso em prazo" : " concursos em prazo") + " · " + novos +
+        (novos === 1 ? " novo" : " novos") + " desde o resumo de " + dados.ultimo_resumo) +
       (vis.length !== doSep.length ? " · a mostrar " + vis.length : "");
-    $("#lista").replaceChildren(...vis.map(i => linha(i, t, false)));
+    const L = $("#lista");
+    L.classList.toggle("dests", noTop);
+    L.replaceChildren(...(noTop ? vis.map(i => cartao(doTop.get(i.id), t)) : vis.map(i => linha(i, t, false))));
     const V = $("#vazio");
     V.hidden = vis.length > 0;
-    V.textContent = doSep.length ? "Nenhum concurso corresponde à procura." : "Nenhum concurso em prazo neste separador.";
+    V.textContent = doSep.length ? (noTop ? "Nenhum dos mais interessantes está marcado para avançar já." : "Nenhum concurso corresponde à procura.")
+      : noTop ? "Nenhum concurso em prazo entre os mais interessantes." : "Nenhum concurso em prazo neste separador.";
     $("#hist-tit").textContent = "Histórico: prazo terminado (" + histSep.length + ")";
     $("#hist-lista").replaceChildren(...histVis.map(i => linha(i, t, true)));
     $("#historico").hidden = histSep.length === 0;
@@ -428,6 +561,7 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
   }
   $("#procura").addEventListener("input", ev => { est.q = ev.target.value; pintar(true); });
   $("#so-novos").addEventListener("click", () => { est.soNovos = !est.soNovos; pintar(true); });
+  $("#so-avancar").addEventListener("click", () => { est.soAvancar = !est.soAvancar; pintar(true); });
   $("#ordem").addEventListener("click", () => { est.porPrazo = !est.porPrazo; pintar(true); });
 
   // ---------- ficha
@@ -441,14 +575,16 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
     repor(C, el("span", {class: "chip " + (i.est === "aberta_qualificavel" ? "ab" : "cond")}, i.f.estado || i.estt),
       !passou && i.marca === "novo" ? el("span", {class: "chip novo"}, "Novo") : null,
       !passou && i.marca === "alterado" ? el("span", {class: "chip alt"}, "Alterado") : null,
-      el("span", {class: "chip " + (f.cls || "neutro")}, f.txt));
+      el("span", {class: "chip " + (f.cls || "neutro")}, f.txt),
+      !passou && noTopAgora(i.id, t) ? el("span", {class: "chip neutro"}, "Mais interessantes") : null);
     const A = $("#f-aviso");
     A.hidden = !passou;
     A.textContent = passou ? "O prazo de proposta terminou a " + i.pz + " (Lisboa). Este concurso está no histórico." : "";
   }
+  const noTopAgora = (id, t) => topAtual(t).find(x => x.i.id === id) || null;
   function mostrarFicha(i) {
     aberto = i;
-    const F = i.f;
+    const F = i.f, x = noTopAgora(i.id, agora());
     $("#f-sep").textContent = nomeSep(i.s) + (i.onde && i.onde !== "—" ? " · " + i.onde : "");
     $("#f-titulo").textContent = F.tit;
     const links = (F.links || []).filter(([, u]) => /^https?:\/\//.test(u));
@@ -459,6 +595,8 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
       el("p", {class: "f-prazo"}, F.prazo),
       el("p", {class: "f-aviso", id: "f-aviso", role: "status", hidden: true}),
       F.so_anuncio ? el("p", {class: "f-nota"}, "Lido só pelo anúncio: as peças na plataforma do comprador não foram lidas.") : null,
+      x ? el("section", {class: "f-dest", id: "f-dest"},
+        el("h2", null, "Mais interessantes: " + x.n + ".º" + (x.d.av ? " · dá para avançar já" : "")), razoes(x.d)) : null,
       el("h2", null, "Parecer"),
       el("p", {class: "f-parecer"}, F.parecer),
       el("h2", null, "Ficha"),
@@ -476,7 +614,7 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
     const ficha = $("#ficha"); if (ficha.hidden) return;
     const id = aberto && aberto.id; aberto = null;
     ficha.hidden = true; document.body.classList.remove("com-ficha");
-    const b = id && document.querySelector('.linha[data-id="' + id + '"]');
+    const b = id && document.querySelector('#painel [data-id="' + id + '"]');
     if (b) { if (b.closest("#historico")) $("#historico").open = true; b.focus({preventScroll: false}); }
   }
   function rota() {
@@ -484,7 +622,7 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
     const h = location.hash.slice(1);
     if (h.startsWith("f-")) {
       const i = procurarItem(h.slice(2));
-      if (i) { if (i.s !== est.sep) { est.sep = i.s; pintar(true); } mostrarFicha(i); return; }
+      if (i) { if (i.s !== est.sep && !(est.sep === TOP && noTopAgora(i.id, agora()))) { est.sep = i.s; pintar(true); } mostrarFicha(i); return; }
     }
     fecharFicha();
   }
@@ -499,7 +637,9 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
   // ---------- entrada
   function depoisDeEntrar() {
     $("#entrada").hidden = true; $("#app").hidden = false; $("#sair").hidden = false;
+    porId = new Map(dados.itens.map(i => [i.id, i]));
     if (!dados.seps.some(s => s.id === est.sep)) est.sep = dados.seps[0].id;
+    $("#como-txt").textContent = dados.dest ? dados.dest.regra : "";
     repor($("#sub"), "Atualizada a " + Prazos.dataPT(dados.gerado), el("span", {class: "lx"}, " (Lisboa)"));
     $("#criterio").textContent = "Critério: " + dados.criterio;
     $("#cobertura").replaceChildren(...(dados.cobertura || []).map(c => el("li", null, c)));
