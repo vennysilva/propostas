@@ -550,7 +550,8 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
     const V = $("#vazio");
     V.hidden = vis.length > 0;
     V.textContent = doSep.length ? (noTop ? "Nenhum dos mais interessantes está marcado para avançar já." : "Nenhum concurso corresponde à procura.")
-      : noTop ? "Nenhum concurso em prazo entre os mais interessantes." : "Nenhum concurso em prazo neste separador.";
+      : noTop ? "Nenhum concurso em prazo entre os mais interessantes."
+      : (dados.vazio && dados.vazio[est.sep]) || "Nenhum concurso em prazo neste separador.";   // o que foi lido e porque nada entrou
     $("#hist-tit").textContent = "Histórico: prazo terminado (" + histSep.length + ")";
     $("#hist-lista").replaceChildren(...histVis.map(i => linha(i, t, true)));
     $("#historico").hidden = histSep.length === 0;
@@ -640,7 +641,7 @@ if (typeof module !== "undefined" && module.exports) module.exports = Prazos;
     porId = new Map(dados.itens.map(i => [i.id, i]));
     if (!dados.seps.some(s => s.id === est.sep)) est.sep = dados.seps[0].id;
     $("#como-txt").textContent = dados.dest ? dados.dest.regra : "";
-    repor($("#sub"), "Atualizada a " + Prazos.dataPT(dados.gerado), el("span", {class: "lx"}, " (Lisboa)"));
+    repor($("#sub"), "Atualizada a " + Prazos.dataPT(dados.gerado).replace(", ", " às "), el("span", {class: "lx"}, " (Lisboa)"));
     $("#criterio").textContent = "Critério: " + dados.criterio;
     $("#cobertura").replaceChildren(...(dados.cobertura || []).map(c => el("li", null, c)));
     $("#nota-final").textContent = "Documento de trabalho da 4x4 Multitrabalhos. A lista é refeita às 08:00 e às 20:00; um concurso cujo prazo " +
