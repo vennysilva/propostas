@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>ACTC · Reunião de 26/11</title>
+<style>
+:root{--bg:#1b2c25;--fg:#faf5e9;--muted:#c9d2c8;--accent:#fcb08f;--line:#3a5046}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--fg);
+font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
+main{width:min(100%,420px)}h1{font:500 2rem/1.1 Georgia,serif;margin:0 0 .4rem}p{color:var(--muted);margin:0 0 1.4rem}
+label{display:block;font-size:.9rem;margin-bottom:.4rem}input{width:100%;font:inherit;padding:.8rem .9rem;border:1px solid var(--line);
+background:transparent;color:var(--fg);border-radius:2px;min-height:48px}button{margin-top:1rem;width:100%;min-height:48px;font:600 1rem/1 inherit;
+background:var(--accent);color:#1b2c25;border:0;border-radius:2px;cursor:pointer}#erro{color:var(--accent);min-height:1.5em;margin-top:.8rem}
+small{display:block;margin-top:2rem;color:var(--muted)}
+</style></head><body><main>
+<h1>ACTC · Reunião de 26/11</h1><p>Página reservada. Escreva a palavra-passe que recebeu.</p>
+<form id="f"><label for="c">Palavra-passe</label><input id="c" type="password" autocomplete="current-password" required>
+<button type="submit">Abrir</button><div id="erro" role="alert"></div></form>
+<small>Bússola Compatível</small></main>
+<script>
+const CONF={"sal": "EKD8Im7KJluMSwL9iof2mg==", "iteracoes": 600000, "grupo": "pg-62a36f203a2dc503"};
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const f=document.getElementById('f'),erro=document.getElementById('erro');
+async function abrir(codigo){
+const dados=new Uint8Array(await (await fetch('dados.bin',{cache:'no-store'})).arrayBuffer());
+const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(codigo),'PBKDF2',false,['deriveKey']);
+const k=await crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt:b64(CONF.sal),iterations:CONF.iteracoes},base,{name:'AES-GCM',length:256},false,['decrypt']);
+const z=await crypto.subtle.decrypt({name:'AES-GCM',iv:dados.slice(0,12),additionalData:new TextEncoder().encode('pagina')},k,dados.slice(12));
+const txt=await new Response(new Blob([z]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+if(CONF.grupo){try{sessionStorage.setItem(CONF.grupo,codigo);}catch(x){}}
+document.open();document.write(txt);document.close();}
+f.addEventListener('submit',async e=>{e.preventDefault();erro.textContent='A abrir…';
+try{await abrir(document.getElementById('c').value);}catch(x){erro.textContent='Palavra-passe errada. Tente de novo.';}});
+(async()=>{if(!CONF.grupo)return;let g=null;try{g=sessionStorage.getItem(CONF.grupo);}catch(x){}
+if(!g)return;f.hidden=true;erro.textContent='A abrir…';
+try{await abrir(g);}catch(x){try{sessionStorage.removeItem(CONF.grupo);}catch(y){}f.hidden=false;erro.textContent='';}})();
+</script></body></html>
